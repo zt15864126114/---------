@@ -19,7 +19,7 @@ import {
   EditOutlined,
   DeleteOutlined,
   ReloadOutlined,
-  HomeOutlined,
+  BankOutlined,
   CheckCircleOutlined,
   WarningOutlined,
   ClockCircleOutlined,
@@ -52,67 +52,99 @@ const BuildingInfo: React.FC = () => {
   const [buildingData] = useState<BuildingData[]>([
     {
       id: '1',
-      name: '主楼',
+      name: '研发中心大楼',
       code: 'BLD-001',
       type: '办公大楼',
-      location: '园区中心',
+      location: '山东新高地智慧园区A区1号楼',
       status: 'normal',
       floors: 20,
       area: 50000,
       lastMaintenanceTime: '2024-02-15',
       nextMaintenanceTime: '2024-05-15',
-      maintainer: '张三',
-      description: '主办公大楼',
+      maintainer: '张明',
+      description: '研发中心大楼是园区的主要研发办公场所，配备先进的研发设备和办公设施。大楼采用智能化管理系统，包括智能照明、空调控制、安防监控等。设有多个研发实验室、会议室和休闲区域，可容纳500人同时办公。',
       createTime: '2024-01-01',
       updateTime: '2024-02-15',
     },
     {
       id: '2',
-      name: '研发楼',
+      name: '创新孵化楼',
       code: 'BLD-002',
-      type: '研发大楼',
-      location: '园区东区',
+      type: '孵化器',
+      location: '山东新高地智慧园区B区2号楼',
       status: 'warning',
       floors: 15,
       area: 30000,
       lastMaintenanceTime: '2024-02-10',
       nextMaintenanceTime: '2024-05-10',
-      maintainer: '李四',
-      description: '研发中心大楼',
+      maintainer: '李华',
+      description: '创新孵化楼为初创企业提供办公空间和创业服务支持。配备共享会议室、路演厅、创业咖啡厅等设施。设有创业导师办公室、知识产权服务中心、投融资对接中心等服务机构，可容纳30家初创企业入驻。',
       createTime: '2024-01-01',
       updateTime: '2024-02-10',
     },
     {
       id: '3',
-      name: '实验楼',
+      name: '综合服务楼',
       code: 'BLD-003',
-      type: '实验大楼',
-      location: '园区西区',
+      type: '服务楼',
+      location: '山东新高地智慧园区C区3号楼',
       status: 'error',
-      floors: 10,
-      area: 20000,
+      floors: 12,
+      area: 25000,
       lastMaintenanceTime: '2024-02-01',
       nextMaintenanceTime: '2024-05-01',
-      maintainer: '王五',
-      description: '实验中心大楼',
+      maintainer: '王强',
+      description: '综合服务楼提供餐饮、会议、健身等配套服务设施。设有员工餐厅、商务餐厅、多功能会议室、健身房、医务室等。配备智能门禁系统和访客管理系统，日均接待访客200人次。',
       createTime: '2024-01-01',
       updateTime: '2024-02-01',
+    },
+    {
+      id: '4',
+      name: '数据中心',
+      code: 'BLD-004',
+      type: '数据中心',
+      location: '山东新高地智慧园区D区4号楼',
+      status: 'normal',
+      floors: 5,
+      area: 15000,
+      lastMaintenanceTime: '2024-02-20',
+      nextMaintenanceTime: '2024-05-20',
+      maintainer: '赵阳',
+      description: '数据中心配备高性能服务器和存储设备，为园区提供数据服务支持。采用T3+级数据中心标准建设，配备双路供电、精密空调、气体灭火等系统。设有运维监控中心、设备机房、网络机房等功能区。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '5',
+      name: '人才公寓',
+      code: 'BLD-005',
+      type: '住宅楼',
+      location: '山东新高地智慧园区E区5号楼',
+      status: 'normal',
+      floors: 18,
+      area: 40000,
+      lastMaintenanceTime: '2024-02-18',
+      nextMaintenanceTime: '2024-05-18',
+      maintainer: '刘芳',
+      description: '人才公寓为园区员工提供舒适的居住环境，配备完善的配套设施。设有单人间、双人间、家庭套房等多种户型，配备家具、家电、网络等设施。设有公共活动区、洗衣房、快递收发室等生活配套。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-18',
     },
   ]);
 
   const columns = [
     {
-      title: '名称',
+      title: '楼宇名称',
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: '编号',
+      title: '楼宇编号',
       dataIndex: 'code',
       key: 'code',
     },
     {
-      title: '类型',
+      title: '楼宇类型',
       dataIndex: 'type',
       key: 'type',
     },
@@ -223,7 +255,7 @@ const BuildingInfo: React.FC = () => {
             <Statistic
               title="总楼宇数"
               value={buildingData.length}
-              prefix={<HomeOutlined />}
+              prefix={<BankOutlined />}
             />
           </Card>
         </Col>
@@ -298,27 +330,29 @@ const BuildingInfo: React.FC = () => {
         >
           <Form.Item
             name="name"
-            label="名称"
-            rules={[{ required: true, message: '请输入名称' }]}
+            label="楼宇名称"
+            rules={[{ required: true, message: '请输入楼宇名称' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             name="code"
-            label="编号"
-            rules={[{ required: true, message: '请输入编号' }]}
+            label="楼宇编号"
+            rules={[{ required: true, message: '请输入楼宇编号' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             name="type"
-            label="类型"
-            rules={[{ required: true, message: '请选择类型' }]}
+            label="楼宇类型"
+            rules={[{ required: true, message: '请选择楼宇类型' }]}
           >
             <Select>
               <Select.Option value="办公大楼">办公大楼</Select.Option>
-              <Select.Option value="研发大楼">研发大楼</Select.Option>
-              <Select.Option value="实验大楼">实验大楼</Select.Option>
+              <Select.Option value="孵化器">孵化器</Select.Option>
+              <Select.Option value="服务楼">服务楼</Select.Option>
+              <Select.Option value="数据中心">数据中心</Select.Option>
+              <Select.Option value="住宅楼">住宅楼</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item

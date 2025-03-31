@@ -32,10 +32,12 @@ interface EmployeeData {
   department: string;
   position: string;
   status: string;
+  gender: string;
   phone: string;
   email: string;
-  entryDate: string;
-  lastLeaveDate: string;
+  entryTime: string;
+  lastAttendanceTime: string;
+  nextAttendanceTime: string;
   description: string;
   createTime: string;
   updateTime: string;
@@ -51,64 +53,104 @@ const EmployeeInfo: React.FC = () => {
   const [employeeData] = useState<EmployeeData[]>([
     {
       id: '1',
-      name: '张三',
+      name: '张明',
       code: 'EMP-001',
-      department: '技术部',
-      position: '高级工程师',
-      status: 'active',
-      phone: '13800138000',
-      email: 'zhangsan@example.com',
-      entryDate: '2024-01-01',
-      lastLeaveDate: '2024-02-15',
-      description: '技术骨干',
+      department: '研发部',
+      position: '技术总监',
+      status: 'normal',
+      gender: '男',
+      phone: '13800138001',
+      email: 'zhangming@example.com',
+      entryTime: '2023-01-15',
+      lastAttendanceTime: '2024-02-15',
+      nextAttendanceTime: '2024-02-16',
+      description: '负责园区核心技术的研发和创新，具有10年技术管理经验。清华大学计算机系博士，曾就职于华为、腾讯等知名企业。主导开发了园区智能管理系统，获得多项发明专利。',
       createTime: '2024-01-01',
       updateTime: '2024-02-15',
     },
     {
       id: '2',
-      name: '李四',
+      name: '李华',
       code: 'EMP-002',
-      department: '销售部',
-      position: '销售经理',
-      status: 'leave',
-      phone: '13800138001',
-      email: 'lisi@example.com',
-      entryDate: '2024-01-02',
-      lastLeaveDate: '2024-02-10',
-      description: '销售主管',
-      createTime: '2024-01-02',
+      department: '运营部',
+      position: '运营经理',
+      status: 'warning',
+      gender: '女',
+      phone: '13800138002',
+      email: 'lihua@example.com',
+      entryTime: '2023-02-20',
+      lastAttendanceTime: '2024-02-10',
+      nextAttendanceTime: '2024-02-11',
+      description: '负责园区的日常运营管理，具有8年运营管理经验。山东大学工商管理硕士，曾就职于万科、保利等知名企业。建立了完善的园区运营管理体系，提升了运营效率30%。',
+      createTime: '2024-01-01',
       updateTime: '2024-02-10',
     },
     {
       id: '3',
-      name: '王五',
+      name: '王强',
       code: 'EMP-003',
-      department: '人事部',
-      position: 'HR专员',
-      status: 'inactive',
-      phone: '13800138002',
-      email: 'wangwu@example.com',
-      entryDate: '2024-01-03',
-      lastLeaveDate: '2024-02-01',
-      description: '人事专员',
-      createTime: '2024-01-03',
+      department: '市场部',
+      position: '市场总监',
+      status: 'error',
+      gender: '男',
+      phone: '13800138003',
+      email: 'wangqiang@example.com',
+      entryTime: '2023-03-10',
+      lastAttendanceTime: '2024-02-01',
+      nextAttendanceTime: '2024-02-02',
+      description: '负责园区的市场推广和品牌建设，具有12年市场营销经验。北京大学市场营销硕士，曾就职于阿里巴巴、京东等知名企业。带领团队年销售额突破10亿元，客户满意度达98%。',
+      createTime: '2024-01-01',
       updateTime: '2024-02-01',
+    },
+    {
+      id: '4',
+      name: '赵阳',
+      code: 'EMP-004',
+      department: '人力资源部',
+      position: 'HR经理',
+      status: 'normal',
+      gender: '女',
+      phone: '13800138004',
+      email: 'zhaoyang@example.com',
+      entryTime: '2023-04-05',
+      lastAttendanceTime: '2024-02-20',
+      nextAttendanceTime: '2024-02-21',
+      description: '负责园区的人才招聘和培训管理，具有6年人力资源管理经验。中国人民大学人力资源管理硕士，曾就职于字节跳动、美团等知名企业。建立了完善的人才培养体系，员工留存率提升20%。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '5',
+      name: '刘芳',
+      code: 'EMP-005',
+      department: '财务部',
+      position: '财务总监',
+      status: 'normal',
+      gender: '女',
+      phone: '13800138005',
+      email: 'liufang@example.com',
+      entryTime: '2023-05-15',
+      lastAttendanceTime: '2024-02-18',
+      nextAttendanceTime: '2024-02-19',
+      description: '负责园区的财务管理和预算控制，具有15年财务管理经验。上海财经大学会计学硕士，注册会计师，曾就职于普华永道、德勤等知名企业。建立了科学的财务管理体系，年节省成本1000万元。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-18',
     },
   ]);
 
   const columns = [
     {
-      title: '姓名',
+      title: '员工姓名',
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: '工号',
+      title: '员工编号',
       dataIndex: 'code',
       key: 'code',
     },
     {
-      title: '部门',
+      title: '所属部门',
       dataIndex: 'department',
       key: 'department',
     },
@@ -123,13 +165,18 @@ const EmployeeInfo: React.FC = () => {
       key: 'status',
       render: (status: string) => {
         const statusMap = {
-          active: { color: 'success', text: '在职' },
-          leave: { color: 'warning', text: '请假' },
-          inactive: { color: 'error', text: '离职' },
+          normal: { color: 'success', text: '正常' },
+          warning: { color: 'warning', text: '警告' },
+          error: { color: 'error', text: '故障' },
         };
         const { color, text } = statusMap[status as keyof typeof statusMap];
         return <Tag color={color}>{text}</Tag>;
       },
+    },
+    {
+      title: '性别',
+      dataIndex: 'gender',
+      key: 'gender',
     },
     {
       title: '联系电话',
@@ -142,14 +189,19 @@ const EmployeeInfo: React.FC = () => {
       key: 'email',
     },
     {
-      title: '入职日期',
-      dataIndex: 'entryDate',
-      key: 'entryDate',
+      title: '入职时间',
+      dataIndex: 'entryTime',
+      key: 'entryTime',
     },
     {
-      title: '最后请假日期',
-      dataIndex: 'lastLeaveDate',
-      key: 'lastLeaveDate',
+      title: '上次考勤时间',
+      dataIndex: 'lastAttendanceTime',
+      key: 'lastAttendanceTime',
+    },
+    {
+      title: '下次考勤时间',
+      dataIndex: 'nextAttendanceTime',
+      key: 'nextAttendanceTime',
     },
     {
       title: '操作',
@@ -221,8 +273,8 @@ const EmployeeInfo: React.FC = () => {
         <Col span={6}>
           <Card>
             <Statistic
-              title="在职员工"
-              value={employeeData.filter((item) => item.status === 'active').length}
+              title="正常员工"
+              value={employeeData.filter((item) => item.status === 'normal').length}
               prefix={<CheckCircleOutlined />}
               valueStyle={{ color: '#3f8600' }}
             />
@@ -231,8 +283,8 @@ const EmployeeInfo: React.FC = () => {
         <Col span={6}>
           <Card>
             <Statistic
-              title="请假员工"
-              value={employeeData.filter((item) => item.status === 'leave').length}
+              title="警告员工"
+              value={employeeData.filter((item) => item.status === 'warning').length}
               prefix={<WarningOutlined />}
               valueStyle={{ color: '#faad14' }}
             />
@@ -241,8 +293,8 @@ const EmployeeInfo: React.FC = () => {
         <Col span={6}>
           <Card>
             <Statistic
-              title="离职员工"
-              value={employeeData.filter((item) => item.status === 'inactive').length}
+              title="故障员工"
+              value={employeeData.filter((item) => item.status === 'error').length}
               prefix={<ClockCircleOutlined />}
               valueStyle={{ color: '#cf1322' }}
             />
@@ -289,27 +341,28 @@ const EmployeeInfo: React.FC = () => {
         >
           <Form.Item
             name="name"
-            label="姓名"
-            rules={[{ required: true, message: '请输入姓名' }]}
+            label="员工姓名"
+            rules={[{ required: true, message: '请输入员工姓名' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             name="code"
-            label="工号"
-            rules={[{ required: true, message: '请输入工号' }]}
+            label="员工编号"
+            rules={[{ required: true, message: '请输入员工编号' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             name="department"
-            label="部门"
-            rules={[{ required: true, message: '请选择部门' }]}
+            label="所属部门"
+            rules={[{ required: true, message: '请选择所属部门' }]}
           >
             <Select>
-              <Select.Option value="技术部">技术部</Select.Option>
-              <Select.Option value="销售部">销售部</Select.Option>
-              <Select.Option value="人事部">人事部</Select.Option>
+              <Select.Option value="研发部">研发部</Select.Option>
+              <Select.Option value="运营部">运营部</Select.Option>
+              <Select.Option value="市场部">市场部</Select.Option>
+              <Select.Option value="人力资源部">人力资源部</Select.Option>
               <Select.Option value="财务部">财务部</Select.Option>
             </Select>
           </Form.Item>
@@ -326,9 +379,19 @@ const EmployeeInfo: React.FC = () => {
             rules={[{ required: true, message: '请选择状态' }]}
           >
             <Select>
-              <Select.Option value="active">在职</Select.Option>
-              <Select.Option value="leave">请假</Select.Option>
-              <Select.Option value="inactive">离职</Select.Option>
+              <Select.Option value="normal">正常</Select.Option>
+              <Select.Option value="warning">警告</Select.Option>
+              <Select.Option value="error">故障</Select.Option>
+            </Select>
+          </Form.Item>
+          <Form.Item
+            name="gender"
+            label="性别"
+            rules={[{ required: true, message: '请选择性别' }]}
+          >
+            <Select>
+              <Select.Option value="男">男</Select.Option>
+              <Select.Option value="女">女</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item
@@ -352,17 +415,11 @@ const EmployeeInfo: React.FC = () => {
             <Input />
           </Form.Item>
           <Form.Item
-            name="entryDate"
-            label="入职日期"
-            rules={[{ required: true, message: '请选择入职日期' }]}
+            name="entryTime"
+            label="入职时间"
+            rules={[{ required: true, message: '请选择入职时间' }]}
           >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="lastLeaveDate"
-            label="最后请假日期"
-          >
-            <Input />
+            <Input type="date" />
           </Form.Item>
           <Form.Item
             name="description"
