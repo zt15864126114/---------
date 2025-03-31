@@ -87,11 +87,11 @@ const SmartMeeting: React.FC = () => {
       meetingName: '项目周会',
       roomName: 'A栋101会议室',
       roomCode: 'MR-A-101',
-      organizer: '张三',
+      organizer: '李明华',
       department: '技术部',
       startTime: '2025-03-20 09:00:00',
       endTime: '2025-03-20 10:00:00',
-      attendees: ['张三', '李四', '王五'],
+      attendees: ['李明华', '王柳', '王五'],
       status: 'completed',
       createTime: '2025-03-19 14:30:00',
     },
@@ -100,11 +100,11 @@ const SmartMeeting: React.FC = () => {
       meetingName: '部门会议',
       roomName: 'B栋201会议室',
       roomCode: 'MR-B-201',
-      organizer: '李四',
+      organizer: '王柳',
       department: '销售部',
       startTime: '2025-03-20 14:00:00',
       endTime: '2025-03-20 15:30:00',
-      attendees: ['李四', '赵六', '钱七'],
+      attendees: ['王柳', '赵六', '钱七'],
       status: 'scheduled',
       createTime: '2025-03-19 16:00:00',
     },
@@ -596,8 +596,8 @@ const SmartMeeting: React.FC = () => {
             rules={[{ required: true, message: '请选择参会人员' }]}
           >
             <Select mode="multiple" placeholder="请选择参会人员">
-              <Select.Option value="张三">张三</Select.Option>
-              <Select.Option value="李四">李四</Select.Option>
+              <Select.Option value="李明华">李明华</Select.Option>
+              <Select.Option value="王柳">王柳</Select.Option>
               <Select.Option value="王五">王五</Select.Option>
               <Select.Option value="赵六">赵六</Select.Option>
               <Select.Option value="钱七">钱七</Select.Option>

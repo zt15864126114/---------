@@ -25,7 +25,7 @@ import {
   ClockCircleOutlined,
 } from '@ant-design/icons';
 
-interface MeetingRoomData {
+interface SmartMeetingData {
   id: string;
   name: string;
   code: string;
@@ -33,10 +33,10 @@ interface MeetingRoomData {
   location: string;
   status: string;
   capacity: number;
-  equipment: string;
-  lastMaintenanceTime: string;
-  nextMaintenanceTime: string;
-  maintainer: string;
+  currentUsers: number;
+  lastMeetingTime: string;
+  nextMeetingTime: string;
+  manager: string;
   description: string;
   createTime: string;
   updateTime: string;
@@ -49,54 +49,166 @@ const SmartMeeting: React.FC = () => {
   const [editingId, setEditingId] = useState<string | null>(null);
 
   // 模拟智能会议室数据
-  const [meetingData] = useState<MeetingRoomData[]>([
+  const [meetingData] = useState<SmartMeetingData[]>([
     {
       id: '1',
-      name: '主会议室',
-      code: 'MR-001',
+      name: '多功能报告厅',
+      code: 'SM-001',
       type: '大型会议室',
-      location: '主楼2层',
+      location: '综合服务楼1层',
       status: 'normal',
-      capacity: 50,
-      equipment: '投影仪,音响,视频会议系统',
-      lastMaintenanceTime: '2024-02-15',
-      nextMaintenanceTime: '2024-05-15',
-      maintainer: '张三',
-      description: '主楼大型会议室',
+      capacity: 200,
+      currentUsers: 150,
+      lastMeetingTime: '2024-02-20 14:00',
+      nextMeetingTime: '2024-02-20 16:00',
+      manager: '张明',
+      description: '多功能报告厅，配备4K投影系统、环绕音响、同声传译系统，支持远程视频会议。配备智能会议系统，支持会议预约、签到和会议纪要自动生成。',
       createTime: '2024-01-01',
-      updateTime: '2024-02-15',
+      updateTime: '2024-02-20',
     },
     {
       id: '2',
-      name: '培训室',
-      code: 'MR-002',
+      name: '研发会议室',
+      code: 'SM-002',
       type: '中型会议室',
-      location: '主楼3层',
+      location: '研发大楼3层',
       status: 'warning',
-      capacity: 30,
-      equipment: '投影仪,音响,电子白板',
-      lastMaintenanceTime: '2024-02-10',
-      nextMaintenanceTime: '2024-05-10',
-      maintainer: '李四',
-      description: '主楼培训室',
+      capacity: 50,
+      currentUsers: 45,
+      lastMeetingTime: '2024-02-20 13:30',
+      nextMeetingTime: '2024-02-20 15:30',
+      manager: '李华',
+      description: '研发会议室，配备高清投影、音响系统，支持远程协作。配备研发专用会议系统，支持代码共享和实时协作。',
       createTime: '2024-01-01',
-      updateTime: '2024-02-10',
+      updateTime: '2024-02-20',
     },
     {
       id: '3',
-      name: '小型会议室',
-      code: 'MR-003',
-      type: '小型会议室',
-      location: '主楼4层',
+      name: '培训教室',
+      code: 'SM-003',
+      type: '培训室',
+      location: '综合服务楼2层',
       status: 'error',
-      capacity: 10,
-      equipment: '投影仪,音响',
-      lastMaintenanceTime: '2024-02-01',
-      nextMaintenanceTime: '2024-05-01',
-      maintainer: '王五',
-      description: '主楼小型会议室',
+      capacity: 100,
+      currentUsers: 0,
+      lastMeetingTime: '2024-02-20 10:00',
+      nextMeetingTime: '2024-02-20 12:00',
+      manager: '王强',
+      description: '培训教室，配备双屏投影、音响系统，支持远程培训。配备培训管理系统，支持课程录制和在线学习。',
       createTime: '2024-01-01',
-      updateTime: '2024-02-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '4',
+      name: '高管会议室',
+      code: 'SM-004',
+      type: '小型会议室',
+      location: '综合服务楼5层',
+      status: 'normal',
+      capacity: 20,
+      currentUsers: 15,
+      lastMeetingTime: '2024-02-20 14:30',
+      nextMeetingTime: '2024-02-20 16:30',
+      manager: '赵阳',
+      description: '高管会议室，配备4K显示屏、音响系统，支持远程会议。配备高管会议系统，支持决策分析和数据可视化。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '5',
+      name: '创意会议室',
+      code: 'SM-005',
+      type: '创意室',
+      location: '研发大楼2层',
+      status: 'normal',
+      capacity: 30,
+      currentUsers: 25,
+      lastMeetingTime: '2024-02-20 13:00',
+      nextMeetingTime: '2024-02-20 15:00',
+      manager: '刘芳',
+      description: '创意会议室，配备交互式白板、音响系统，支持创意讨论。配备创意协作系统，支持头脑风暴和创意展示。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '6',
+      name: '视频会议室',
+      code: 'SM-006',
+      type: '视频会议室',
+      location: '综合服务楼3层',
+      status: 'normal',
+      capacity: 40,
+      currentUsers: 35,
+      lastMeetingTime: '2024-02-20 14:00',
+      nextMeetingTime: '2024-02-20 16:00',
+      manager: '陈伟',
+      description: '视频会议室，配备高清摄像头、音响系统，支持远程视频会议。配备视频会议系统，支持多端接入和实时互动。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '7',
+      name: '项目会议室',
+      code: 'SM-007',
+      type: '中型会议室',
+      location: '研发大楼4层',
+      status: 'warning',
+      capacity: 60,
+      currentUsers: 55,
+      lastMeetingTime: '2024-02-20 13:30',
+      nextMeetingTime: '2024-02-20 15:30',
+      manager: '杨丽',
+      description: '项目会议室，配备投影系统、音响系统，支持项目讨论。配备项目管理系统，支持任务跟踪和进度展示。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '8',
+      name: '客户会议室',
+      code: 'SM-008',
+      type: '小型会议室',
+      location: '综合服务楼1层',
+      status: 'normal',
+      capacity: 15,
+      currentUsers: 10,
+      lastMeetingTime: '2024-02-20 14:00',
+      nextMeetingTime: '2024-02-20 16:00',
+      manager: '周思',
+      description: '客户会议室，配备高清显示屏、音响系统，支持客户接待。配备客户管理系统，支持客户资料和会议记录。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '9',
+      name: '培训室A',
+      code: 'SM-009',
+      type: '培训室',
+      location: '综合服务楼2层',
+      status: 'normal',
+      capacity: 80,
+      currentUsers: 75,
+      lastMeetingTime: '2024-02-20 13:00',
+      nextMeetingTime: '2024-02-20 15:00',
+      manager: '吴霞',
+      description: '培训室A，配备双屏投影、音响系统，支持技能培训。配备培训管理系统，支持课程管理和学习跟踪。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '10',
+      name: '会议室A',
+      code: 'SM-010',
+      type: '小型会议室',
+      location: '研发大楼1层',
+      status: 'normal',
+      capacity: 25,
+      currentUsers: 20,
+      lastMeetingTime: '2024-02-20 14:30',
+      nextMeetingTime: '2024-02-20 16:30',
+      manager: '李智',
+      description: '会议室A，配备投影系统、音响系统，支持日常会议。配备会议管理系统，支持会议预约和资源管理。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
     },
   ]);
 
@@ -136,35 +248,36 @@ const SmartMeeting: React.FC = () => {
       },
     },
     {
-      title: '容纳人数',
+      title: '容量',
       dataIndex: 'capacity',
       key: 'capacity',
       render: (capacity: number) => `${capacity}人`,
     },
     {
-      title: '设备配置',
-      dataIndex: 'equipment',
-      key: 'equipment',
+      title: '当前使用',
+      dataIndex: 'currentUsers',
+      key: 'currentUsers',
+      render: (currentUsers: number) => `${currentUsers}人`,
     },
     {
-      title: '最后维护时间',
-      dataIndex: 'lastMaintenanceTime',
-      key: 'lastMaintenanceTime',
+      title: '上次会议时间',
+      dataIndex: 'lastMeetingTime',
+      key: 'lastMeetingTime',
     },
     {
-      title: '下次维护时间',
-      dataIndex: 'nextMaintenanceTime',
-      key: 'nextMaintenanceTime',
+      title: '下次会议时间',
+      dataIndex: 'nextMeetingTime',
+      key: 'nextMeetingTime',
     },
     {
-      title: '维护人员',
-      dataIndex: 'maintainer',
-      key: 'maintainer',
+      title: '管理员',
+      dataIndex: 'manager',
+      key: 'manager',
     },
     {
       title: '操作',
       key: 'action',
-      render: (_: any, record: MeetingRoomData) => (
+      render: (_: any, record: SmartMeetingData) => (
         <Space size="middle">
           <Button
             type="link"
@@ -186,13 +299,13 @@ const SmartMeeting: React.FC = () => {
     },
   ];
 
-  const handleEdit = (record: MeetingRoomData) => {
+  const handleEdit = (record: SmartMeetingData) => {
     setEditingId(record.id);
     form.setFieldsValue(record);
     setModalVisible(true);
   };
 
-  const handleDelete = (record: MeetingRoomData) => {
+  const handleDelete = (record: SmartMeetingData) => {
     Modal.confirm({
       title: '确认删除',
       content: `确定要删除会议室 ${record.name} 吗？`,
@@ -320,6 +433,9 @@ const SmartMeeting: React.FC = () => {
               <Select.Option value="大型会议室">大型会议室</Select.Option>
               <Select.Option value="中型会议室">中型会议室</Select.Option>
               <Select.Option value="小型会议室">小型会议室</Select.Option>
+              <Select.Option value="培训室">培训室</Select.Option>
+              <Select.Option value="创意室">创意室</Select.Option>
+              <Select.Option value="视频会议室">视频会议室</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item
@@ -342,22 +458,22 @@ const SmartMeeting: React.FC = () => {
           </Form.Item>
           <Form.Item
             name="capacity"
-            label="容纳人数"
-            rules={[{ required: true, message: '请输入容纳人数' }]}
+            label="容量"
+            rules={[{ required: true, message: '请输入容量' }]}
           >
             <Input type="number" />
           </Form.Item>
           <Form.Item
-            name="equipment"
-            label="设备配置"
-            rules={[{ required: true, message: '请输入设备配置' }]}
+            name="currentUsers"
+            label="当前使用人数"
+            rules={[{ required: true, message: '请输入当前使用人数' }]}
           >
-            <Input />
+            <Input type="number" />
           </Form.Item>
           <Form.Item
-            name="maintainer"
-            label="维护人员"
-            rules={[{ required: true, message: '请输入维护人员' }]}
+            name="manager"
+            label="管理员"
+            rules={[{ required: true, message: '请输入管理员' }]}
           >
             <Input />
           </Form.Item>

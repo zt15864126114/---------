@@ -18,7 +18,7 @@ const PersonSync: React.FC = () => {
   const syncData: PersonSync[] = [
     {
       id: '1',
-      name: '张三',
+      name: '李明华',
       type: 'employee',
       department: '技术部',
       syncTime: '2024-03-20 10:00:00',
@@ -27,7 +27,7 @@ const PersonSync: React.FC = () => {
     },
     {
       id: '2',
-      name: '李四',
+      name: '王柳',
       type: 'employee',
       department: '人事部',
       syncTime: '2024-03-20 10:15:00',

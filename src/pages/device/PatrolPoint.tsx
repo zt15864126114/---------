@@ -32,10 +32,10 @@ interface PatrolPointData {
   type: string;
   location: string;
   status: string;
-  patrolFrequency: string;
+  frequency: string;
   lastPatrolTime: string;
   nextPatrolTime: string;
-  patrolPerson: string;
+  patroler: string;
   description: string;
   createTime: string;
   updateTime: string;
@@ -47,52 +47,157 @@ const PatrolPoint: React.FC = () => {
   const [form] = Form.useForm();
   const [editingId, setEditingId] = useState<string | null>(null);
 
-  // 模拟巡检点位数据
+  // 模拟巡更点位数据
   const [patrolData] = useState<PatrolPointData[]>([
     {
       id: '1',
-      name: '主楼消防设施',
+      name: '园区主入口',
       code: 'PP-001',
-      type: '消防设施',
-      location: '主楼1层',
+      type: '重点区域',
+      location: '园区南门',
       status: 'normal',
-      patrolFrequency: '每日',
-      lastPatrolTime: '2024-02-15 09:00',
-      nextPatrolTime: '2024-02-16 09:00',
-      patrolPerson: '张三',
-      description: '主楼消防设施巡检点',
+      frequency: '每小时',
+      lastPatrolTime: '2024-02-20 15:00',
+      nextPatrolTime: '2024-02-20 16:00',
+      patroler: '张明',
+      description: '园区主入口巡更点，负责监控人员进出、车辆通行和周边环境安全。配备高清监控和门禁系统，24小时值守。',
       createTime: '2024-01-01',
-      updateTime: '2024-02-15',
+      updateTime: '2024-02-20',
     },
     {
       id: '2',
-      name: '园区配电室',
+      name: '研发中心',
       code: 'PP-002',
-      type: '电力设施',
-      location: '园区配电室',
+      type: '重点区域',
+      location: '研发大楼',
       status: 'warning',
-      patrolFrequency: '每周',
-      lastPatrolTime: '2024-02-10 14:00',
-      nextPatrolTime: '2024-02-17 14:00',
-      patrolPerson: '李四',
-      description: '园区配电室巡检点',
+      frequency: '每2小时',
+      lastPatrolTime: '2024-02-20 14:30',
+      nextPatrolTime: '2024-02-20 16:30',
+      patroler: '李华',
+      description: '研发中心巡更点，负责监控研发区域安全、设备运行和人员出入。配备实验室安全监控系统，确保研发环境安全。',
       createTime: '2024-01-01',
-      updateTime: '2024-02-10',
+      updateTime: '2024-02-20',
     },
     {
       id: '3',
-      name: '停车场监控室',
+      name: '数据中心',
       code: 'PP-003',
-      type: '安防设施',
-      location: '地下停车场',
+      type: '重点区域',
+      location: '数据中心机房',
       status: 'error',
-      patrolFrequency: '每日',
-      lastPatrolTime: '2024-02-01 10:00',
-      nextPatrolTime: '2024-02-02 10:00',
-      patrolPerson: '王五',
-      description: '停车场监控室巡检点',
+      frequency: '每30分钟',
+      lastPatrolTime: '2024-02-20 14:45',
+      nextPatrolTime: '2024-02-20 15:15',
+      patroler: '王强',
+      description: '数据中心巡更点，负责监控机房设备运行、温湿度和消防安全。配备环境监控系统，确保数据中心安全运行。',
       createTime: '2024-01-01',
-      updateTime: '2024-02-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '4',
+      name: '停车场',
+      code: 'PP-004',
+      type: '一般区域',
+      location: '地下停车场',
+      status: 'normal',
+      frequency: '每3小时',
+      lastPatrolTime: '2024-02-20 14:00',
+      nextPatrolTime: '2024-02-20 17:00',
+      patroler: '赵阳',
+      description: '停车场巡更点，负责监控车辆停放、照明和消防设施。配备车位引导系统和消防监控系统，确保停车场安全。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '5',
+      name: '员工餐厅',
+      code: 'PP-005',
+      type: '一般区域',
+      location: '综合服务楼',
+      status: 'normal',
+      frequency: '每4小时',
+      lastPatrolTime: '2024-02-20 13:00',
+      nextPatrolTime: '2024-02-20 17:00',
+      patroler: '刘芳',
+      description: '员工餐厅巡更点，负责监控食品安全、环境卫生和消防设施。配备食品安全监控系统，确保就餐环境安全。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '6',
+      name: '人才公寓',
+      code: 'PP-006',
+      type: '重点区域',
+      location: '宿舍区',
+      status: 'normal',
+      frequency: '每2小时',
+      lastPatrolTime: '2024-02-20 14:00',
+      nextPatrolTime: '2024-02-20 16:00',
+      patroler: '陈伟',
+      description: '人才公寓巡更点，负责监控人员出入、消防安全和环境卫生。配备门禁系统和消防监控系统，确保居住安全。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '7',
+      name: '园区周界',
+      code: 'PP-007',
+      type: '重点区域',
+      location: '园区边界',
+      status: 'warning',
+      frequency: '每小时',
+      lastPatrolTime: '2024-02-20 14:30',
+      nextPatrolTime: '2024-02-20 15:30',
+      patroler: '杨丽',
+      description: '园区周界巡更点，负责监控园区边界安全、围栏状态和周边环境。配备红外监控系统，确保园区边界安全。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '8',
+      name: '实验室区域',
+      code: 'PP-008',
+      type: '重点区域',
+      location: '研发实验室',
+      status: 'normal',
+      frequency: '每2小时',
+      lastPatrolTime: '2024-02-20 14:00',
+      nextPatrolTime: '2024-02-20 16:00',
+      patroler: '周思',
+      description: '实验室区域巡更点，负责监控实验安全、设备运行和危险品管理。配备实验室安全监控系统，确保实验安全。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '9',
+      name: '休闲区域',
+      code: 'PP-009',
+      type: '一般区域',
+      location: '园区休闲区',
+      status: 'normal',
+      frequency: '每4小时',
+      lastPatrolTime: '2024-02-20 13:00',
+      nextPatrolTime: '2024-02-20 17:00',
+      patroler: '吴霞',
+      description: '休闲区域巡更点，负责监控环境安全、设施完好和人员活动。配备环境监控系统，确保休闲环境安全。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '10',
+      name: '会议室区域',
+      code: 'PP-010',
+      type: '一般区域',
+      location: '综合服务楼',
+      status: 'normal',
+      frequency: '每3小时',
+      lastPatrolTime: '2024-02-20 14:00',
+      nextPatrolTime: '2024-02-20 17:00',
+      patroler: '李智',
+      description: '会议室区域巡更点，负责监控设备运行、消防安全和环境卫生。配备会议系统监控，确保会议环境安全。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
     },
   ]);
 
@@ -132,24 +237,24 @@ const PatrolPoint: React.FC = () => {
       },
     },
     {
-      title: '巡检频率',
-      dataIndex: 'patrolFrequency',
-      key: 'patrolFrequency',
+      title: '巡更频率',
+      dataIndex: 'frequency',
+      key: 'frequency',
     },
     {
-      title: '上次巡检时间',
+      title: '上次巡更时间',
       dataIndex: 'lastPatrolTime',
       key: 'lastPatrolTime',
     },
     {
-      title: '下次巡检时间',
+      title: '下次巡更时间',
       dataIndex: 'nextPatrolTime',
       key: 'nextPatrolTime',
     },
     {
-      title: '巡检人员',
-      dataIndex: 'patrolPerson',
-      key: 'patrolPerson',
+      title: '巡更人员',
+      dataIndex: 'patroler',
+      key: 'patroler',
     },
     {
       title: '操作',
@@ -185,7 +290,7 @@ const PatrolPoint: React.FC = () => {
   const handleDelete = (record: PatrolPointData) => {
     Modal.confirm({
       title: '确认删除',
-      content: `确定要删除巡检点位 ${record.name} 吗？`,
+      content: `确定要删除巡更点位 ${record.name} 吗？`,
       onOk() {
         // 这里添加删除逻辑
         message.success('删除成功');
@@ -212,7 +317,7 @@ const PatrolPoint: React.FC = () => {
         <Col span={6}>
           <Card>
             <Statistic
-              title="总巡检点"
+              title="总巡更点"
               value={patrolData.length}
               prefix={<SafetyCertificateOutlined />}
             />
@@ -221,7 +326,7 @@ const PatrolPoint: React.FC = () => {
         <Col span={6}>
           <Card>
             <Statistic
-              title="正常巡检点"
+              title="正常巡更点"
               value={patrolData.filter((item) => item.status === 'normal').length}
               prefix={<CheckCircleOutlined />}
               valueStyle={{ color: '#3f8600' }}
@@ -231,7 +336,7 @@ const PatrolPoint: React.FC = () => {
         <Col span={6}>
           <Card>
             <Statistic
-              title="警告巡检点"
+              title="警告巡更点"
               value={patrolData.filter((item) => item.status === 'warning').length}
               prefix={<WarningOutlined />}
               valueStyle={{ color: '#faad14' }}
@@ -241,7 +346,7 @@ const PatrolPoint: React.FC = () => {
         <Col span={6}>
           <Card>
             <Statistic
-              title="故障巡检点"
+              title="故障巡更点"
               value={patrolData.filter((item) => item.status === 'error').length}
               prefix={<ClockCircleOutlined />}
               valueStyle={{ color: '#cf1322' }}
@@ -261,7 +366,7 @@ const PatrolPoint: React.FC = () => {
               setModalVisible(true);
             }}
           >
-            添加巡检点
+            添加巡更点
           </Button>
           <Button icon={<ReloadOutlined />}>刷新</Button>
         </Space>
@@ -274,7 +379,7 @@ const PatrolPoint: React.FC = () => {
       </Card>
 
       <Modal
-        title={editingId ? '编辑巡检点' : '添加巡检点'}
+        title={editingId ? '编辑巡更点' : '添加巡更点'}
         open={modalVisible}
         onOk={handleModalOk}
         onCancel={() => {
@@ -307,10 +412,8 @@ const PatrolPoint: React.FC = () => {
             rules={[{ required: true, message: '请选择类型' }]}
           >
             <Select>
-              <Select.Option value="消防设施">消防设施</Select.Option>
-              <Select.Option value="电力设施">电力设施</Select.Option>
-              <Select.Option value="安防设施">安防设施</Select.Option>
-              <Select.Option value="其他设施">其他设施</Select.Option>
+              <Select.Option value="重点区域">重点区域</Select.Option>
+              <Select.Option value="一般区域">一般区域</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item
@@ -332,20 +435,22 @@ const PatrolPoint: React.FC = () => {
             </Select>
           </Form.Item>
           <Form.Item
-            name="patrolFrequency"
-            label="巡检频率"
-            rules={[{ required: true, message: '请选择巡检频率' }]}
+            name="frequency"
+            label="巡更频率"
+            rules={[{ required: true, message: '请选择巡更频率' }]}
           >
             <Select>
-              <Select.Option value="每日">每日</Select.Option>
-              <Select.Option value="每周">每周</Select.Option>
-              <Select.Option value="每月">每月</Select.Option>
+              <Select.Option value="每30分钟">每30分钟</Select.Option>
+              <Select.Option value="每小时">每小时</Select.Option>
+              <Select.Option value="每2小时">每2小时</Select.Option>
+              <Select.Option value="每3小时">每3小时</Select.Option>
+              <Select.Option value="每4小时">每4小时</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item
-            name="patrolPerson"
-            label="巡检人员"
-            rules={[{ required: true, message: '请输入巡检人员' }]}
+            name="patroler"
+            label="巡更人员"
+            rules={[{ required: true, message: '请输入巡更人员' }]}
           >
             <Input />
           </Form.Item>

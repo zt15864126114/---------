@@ -22,7 +22,7 @@ const AccessRecords: React.FC = () => {
     {
       id: '1',
       deviceName: '1号楼大厅门禁',
-      personName: '张三',
+      personName: '李明华',
       personType: 'employee',
       accessType: 'face',
       accessTime: '2024-03-20 10:30:00',
@@ -31,7 +31,7 @@ const AccessRecords: React.FC = () => {
     {
       id: '2',
       deviceName: '2号楼侧门门禁',
-      personName: '李四',
+      personName: '王柳',
       personType: 'visitor',
       accessType: 'card',
       accessTime: '2024-03-19 15:45:00',

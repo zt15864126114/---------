@@ -33,7 +33,7 @@ const Visitor: React.FC = () => {
       company: '科技有限公司',
       licensePlate: '鲁A12345',
       purpose: '商务洽谈',
-      host: '张三',
+      host: '李明华',
       visitTime: ['2024-03-20 09:00:00', '2024-03-20 17:00:00'],
       status: 'approved',
       approvalTime: '2024-03-19 14:30:00'
@@ -45,7 +45,7 @@ const Visitor: React.FC = () => {
       company: '网络科技公司',
       licensePlate: '鲁B67890',
       purpose: '项目对接',
-      host: '李四',
+      host: '王柳',
       visitTime: ['2024-03-21 10:00:00', '2024-03-21 16:00:00'],
       status: 'pending'
     }

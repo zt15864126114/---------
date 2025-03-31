@@ -25,7 +25,7 @@ import {
   ClockCircleOutlined,
 } from '@ant-design/icons';
 
-interface VideoData {
+interface VideoMonitorData {
   id: string;
   name: string;
   code: string;
@@ -33,9 +33,8 @@ interface VideoData {
   location: string;
   status: string;
   resolution: string;
-  frameRate: string;
+  fps: number;
   storageDays: number;
-  storageUsed: number;
   lastMaintenanceTime: string;
   nextMaintenanceTime: string;
   maintainer: string;
@@ -44,67 +43,183 @@ interface VideoData {
   updateTime: string;
 }
 
-const VideoSurveillance: React.FC = () => {
+const VideoMonitor: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [form] = Form.useForm();
   const [editingId, setEditingId] = useState<string | null>(null);
 
   // 模拟视频监控数据
-  const [videoData] = useState<VideoData[]>([
+  const [videoData] = useState<VideoMonitorData[]>([
     {
       id: '1',
-      name: '主楼大厅监控',
-      code: 'VIDEO-001',
-      type: 'IP摄像头',
-      location: '主楼1层大厅',
+      name: '园区主入口监控',
+      code: 'VM-001',
+      type: '高清网络摄像机',
+      location: '园区主入口',
       status: 'normal',
       resolution: '4K',
-      frameRate: '30fps',
+      fps: 30,
       storageDays: 30,
-      storageUsed: 15,
       lastMaintenanceTime: '2024-02-15',
       nextMaintenanceTime: '2024-05-15',
-      maintainer: '李明华',
-      description: '主楼大厅高清监控',
+      maintainer: '张明',
+      description: '园区主入口高清监控系统，采用4K分辨率网络摄像机，支持人脸识别和车牌识别。配备智能分析系统，支持异常行为检测。存储时间30天，支持远程查看。',
       createTime: '2024-01-01',
       updateTime: '2024-02-15',
     },
     {
       id: '2',
-      name: '停车场监控',
-      code: 'VIDEO-002',
-      type: 'IP摄像头',
-      location: '地下停车场',
+      name: '研发区监控系统',
+      code: 'VM-002',
+      type: 'AI智能摄像机',
+      location: '研发中心大楼',
       status: 'warning',
-      resolution: '1080P',
-      frameRate: '25fps',
-      storageDays: 30,
-      storageUsed: 28,
+      resolution: '2K',
+      fps: 25,
+      storageDays: 90,
       lastMaintenanceTime: '2024-02-10',
       nextMaintenanceTime: '2024-05-10',
-      maintainer: '王柳',
-      description: '停车场出入口监控',
+      maintainer: '李华',
+      description: '研发区智能监控系统，采用AI智能摄像机，支持人员轨迹跟踪和区域入侵检测。配备研发区专用存储系统，支持90天数据存储。支持研发数据安全保护。',
       createTime: '2024-01-01',
       updateTime: '2024-02-10',
     },
     {
       id: '3',
-      name: '园区周界监控',
-      code: 'VIDEO-003',
-      type: 'IP摄像头',
-      location: '园区围墙',
+      name: '停车场监控系统',
+      code: 'VM-003',
+      type: '全景摄像机',
+      location: '地下停车场',
       status: 'error',
       resolution: '4K',
-      frameRate: '30fps',
-      storageDays: 30,
-      storageUsed: 0,
+      fps: 20,
+      storageDays: 60,
       lastMaintenanceTime: '2024-02-01',
       nextMaintenanceTime: '2024-05-01',
-      maintainer: '王五',
-      description: '园区周界安防监控',
+      maintainer: '王强',
+      description: '停车场全景监控系统，采用4K全景摄像机，支持360度无死角监控。配备智能停车管理系统，支持车位引导和车辆定位。存储时间60天，支持车牌识别。',
       createTime: '2024-01-01',
       updateTime: '2024-02-01',
+    },
+    {
+      id: '4',
+      name: '安防监控系统',
+      code: 'VM-004',
+      type: '红外热成像摄像机',
+      location: '园区周界',
+      status: 'normal',
+      resolution: '2K',
+      fps: 15,
+      storageDays: 90,
+      lastMaintenanceTime: '2024-02-20',
+      nextMaintenanceTime: '2024-05-20',
+      maintainer: '赵阳',
+      description: '园区周界安防监控系统，采用红外热成像摄像机，支持夜间监控和温度异常检测。配备智能安防系统，支持入侵报警和联动控制。存储时间90天，支持远程监控。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '5',
+      name: '会议室监控系统',
+      code: 'VM-005',
+      type: '高清云台摄像机',
+      location: '综合服务楼会议室',
+      status: 'normal',
+      resolution: '1080P',
+      fps: 30,
+      storageDays: 30,
+      lastMaintenanceTime: '2024-02-18',
+      nextMaintenanceTime: '2024-05-18',
+      maintainer: '刘芳',
+      description: '会议室监控系统，采用高清云台摄像机，支持远程控制和自动跟踪。配备会议管理系统，支持视频会议和远程协作。存储时间30天，支持会议记录。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-18',
+    },
+    {
+      id: '6',
+      name: '餐厅监控系统',
+      code: 'VM-006',
+      type: '高清网络摄像机',
+      location: '员工餐厅',
+      status: 'normal',
+      resolution: '2K',
+      fps: 25,
+      storageDays: 30,
+      lastMaintenanceTime: '2024-02-16',
+      nextMaintenanceTime: '2024-05-16',
+      maintainer: '陈伟',
+      description: '餐厅监控系统，采用2K高清网络摄像机，支持食品安全监控和客流统计。配备餐厅管理系统，支持食品安全追溯。存储时间30天，支持远程查看。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-16',
+    },
+    {
+      id: '7',
+      name: '宿舍区监控系统',
+      code: 'VM-007',
+      type: '高清网络摄像机',
+      location: '人才公寓',
+      status: 'warning',
+      resolution: '2K',
+      fps: 20,
+      storageDays: 30,
+      lastMaintenanceTime: '2024-02-14',
+      nextMaintenanceTime: '2024-05-14',
+      maintainer: '杨丽',
+      description: '宿舍区监控系统，采用2K高清网络摄像机，支持人员出入管理和安全监控。配备宿舍管理系统，支持访客记录和异常报警。存储时间30天，支持远程查看。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-14',
+    },
+    {
+      id: '8',
+      name: '休闲区监控系统',
+      code: 'VM-008',
+      type: '高清网络摄像机',
+      location: '园区休闲区',
+      status: 'normal',
+      resolution: '2K',
+      fps: 20,
+      storageDays: 30,
+      lastMaintenanceTime: '2024-02-12',
+      nextMaintenanceTime: '2024-05-12',
+      maintainer: '周思',
+      description: '休闲区监控系统，采用2K高清网络摄像机，支持人流统计和环境监控。配备休闲区管理系统，支持设施管理和安全监控。存储时间30天，支持远程查看。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-12',
+    },
+    {
+      id: '9',
+      name: '实验室监控系统',
+      code: 'VM-009',
+      type: 'AI智能摄像机',
+      location: '研发实验室',
+      status: 'normal',
+      resolution: '4K',
+      fps: 30,
+      storageDays: 90,
+      lastMaintenanceTime: '2024-02-10',
+      nextMaintenanceTime: '2024-05-10',
+      maintainer: '吴霞',
+      description: '实验室监控系统，采用4K AI智能摄像机，支持实验过程记录和安全监控。配备实验室管理系统，支持实验数据采集和安全预警。存储时间90天，支持远程查看。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-10',
+    },
+    {
+      id: '10',
+      name: '数据中心监控系统',
+      code: 'VM-010',
+      type: '高清网络摄像机',
+      location: '数据中心机房',
+      status: 'normal',
+      resolution: '2K',
+      fps: 20,
+      storageDays: 90,
+      lastMaintenanceTime: '2024-02-08',
+      nextMaintenanceTime: '2024-05-08',
+      maintainer: '李智',
+      description: '数据中心监控系统，采用2K高清网络摄像机，支持机房环境监控和人员管理。配备数据中心管理系统，支持设备运行监控和安全预警。存储时间90天，支持远程查看。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-08',
     },
   ]);
 
@@ -150,13 +265,15 @@ const VideoSurveillance: React.FC = () => {
     },
     {
       title: '帧率',
-      dataIndex: 'frameRate',
-      key: 'frameRate',
+      dataIndex: 'fps',
+      key: 'fps',
+      render: (fps: number) => `${fps}fps`,
     },
     {
-      title: '存储使用',
-      key: 'storage',
-      render: (record: VideoData) => `${record.storageUsed}/${record.storageDays}天`,
+      title: '存储天数',
+      dataIndex: 'storageDays',
+      key: 'storageDays',
+      render: (days: number) => `${days}天`,
     },
     {
       title: '最后维护时间',
@@ -176,7 +293,7 @@ const VideoSurveillance: React.FC = () => {
     {
       title: '操作',
       key: 'action',
-      render: (_: any, record: VideoData) => (
+      render: (_: any, record: VideoMonitorData) => (
         <Space size="middle">
           <Button
             type="link"
@@ -198,13 +315,13 @@ const VideoSurveillance: React.FC = () => {
     },
   ];
 
-  const handleEdit = (record: VideoData) => {
+  const handleEdit = (record: VideoMonitorData) => {
     setEditingId(record.id);
     form.setFieldsValue(record);
     setModalVisible(true);
   };
 
-  const handleDelete = (record: VideoData) => {
+  const handleDelete = (record: VideoMonitorData) => {
     Modal.confirm({
       title: '确认删除',
       content: `确定要删除视频监控 ${record.name} 吗？`,
@@ -329,8 +446,11 @@ const VideoSurveillance: React.FC = () => {
             rules={[{ required: true, message: '请选择类型' }]}
           >
             <Select>
-              <Select.Option value="IP摄像头">IP摄像头</Select.Option>
-              <Select.Option value="模拟摄像头">模拟摄像头</Select.Option>
+              <Select.Option value="高清网络摄像机">高清网络摄像机</Select.Option>
+              <Select.Option value="AI智能摄像机">AI智能摄像机</Select.Option>
+              <Select.Option value="全景摄像机">全景摄像机</Select.Option>
+              <Select.Option value="红外热成像摄像机">红外热成像摄像机</Select.Option>
+              <Select.Option value="高清云台摄像机">高清云台摄像机</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item
@@ -358,32 +478,21 @@ const VideoSurveillance: React.FC = () => {
           >
             <Select>
               <Select.Option value="4K">4K</Select.Option>
+              <Select.Option value="2K">2K</Select.Option>
               <Select.Option value="1080P">1080P</Select.Option>
-              <Select.Option value="720P">720P</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item
-            name="frameRate"
+            name="fps"
             label="帧率"
-            rules={[{ required: true, message: '请选择帧率' }]}
+            rules={[{ required: true, message: '请输入帧率' }]}
           >
-            <Select>
-              <Select.Option value="30fps">30fps</Select.Option>
-              <Select.Option value="25fps">25fps</Select.Option>
-              <Select.Option value="20fps">20fps</Select.Option>
-            </Select>
+            <Input type="number" />
           </Form.Item>
           <Form.Item
             name="storageDays"
             label="存储天数"
             rules={[{ required: true, message: '请输入存储天数' }]}
-          >
-            <Input type="number" />
-          </Form.Item>
-          <Form.Item
-            name="storageUsed"
-            label="已用天数"
-            rules={[{ required: true, message: '请输入已用天数' }]}
           >
             <Input type="number" />
           </Form.Item>
@@ -406,4 +515,4 @@ const VideoSurveillance: React.FC = () => {
   );
 };
 
-export default VideoSurveillance; 
+export default VideoMonitor; 

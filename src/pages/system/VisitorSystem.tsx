@@ -28,13 +28,13 @@ const VisitorSystem: React.FC = () => {
   const visitorData: Visitor[] = [
     {
       id: '1',
-      name: '张三',
+      name: '李明华',
       idType: '身份证',
       idNumber: '110101199001011234',
       phone: '13800138000',
       company: '科技有限公司',
       purpose: '业务洽谈',
-      host: '李四',
+      host: '王柳',
       department: '销售部',
       visitTime: '2025-03-20 09:00:00',
       leaveTime: '2025-03-20 11:00:00',
@@ -60,7 +60,7 @@ const VisitorSystem: React.FC = () => {
     },
     {
       id: '3',
-      name: '孙七',
+      name: '赵琳',
       idType: '护照',
       idNumber: 'E12345678',
       phone: '13800138002',

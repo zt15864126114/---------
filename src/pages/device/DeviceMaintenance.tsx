@@ -1,22 +1,42 @@
 import React, { useState } from 'react';
-import { Card, Table, Button, Space, Tag, message, Row, Col, Statistic, Modal, Form, Input, Select, DatePicker } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
+import {
+  Card,
+  Table,
+  Button,
+  Space,
+  Modal,
+  Form,
+  Input,
+  Select,
+  Tag,
+  message,
+  Row,
+  Col,
+  Statistic,
+} from 'antd';
+import {
+  PlusOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  ReloadOutlined,
+  ToolOutlined,
+  CheckCircleOutlined,
+  WarningOutlined,
+  ClockCircleOutlined,
+} from '@ant-design/icons';
 
-const { RangePicker } = DatePicker;
-
-interface MaintenanceData {
+interface DeviceMaintenanceData {
   id: string;
-  deviceName: string;
-  deviceCode: string;
-  category: string;
-  maintenanceType: string;
-  startTime: string;
-  endTime: string;
-  maintainer: string;
+  name: string;
+  code: string;
+  type: string;
+  location: string;
   status: string;
+  lastMaintenanceTime: string;
+  nextMaintenanceTime: string;
+  maintainer: string;
+  maintenanceType: string;
   description: string;
-  result: string;
-  cost: number;
   createTime: string;
   updateTime: string;
 }
@@ -27,150 +47,220 @@ const DeviceMaintenance: React.FC = () => {
   const [form] = Form.useForm();
   const [editingId, setEditingId] = useState<string | null>(null);
 
-  // 模拟维护记录数据
-  const data: MaintenanceData[] = [
+  // 模拟设备维护数据
+  const [maintenanceData] = useState<DeviceMaintenanceData[]>([
     {
       id: '1',
-      deviceName: '摄像头-01',
-      deviceCode: 'CAM001',
-      category: '视频监控',
+      name: '园区主配电室',
+      code: 'DM-001',
+      type: '电力设备',
+      location: '园区配电中心',
+      status: 'normal',
+      lastMaintenanceTime: '2024-02-15',
+      nextMaintenanceTime: '2024-05-15',
+      maintainer: '张明',
       maintenanceType: '定期维护',
-      startTime: '2025-03-20 09:00:00',
-      endTime: '2025-03-20 10:00:00',
-      maintainer: '张三',
-      status: 'completed',
-      description: '清洁镜头，检查连接',
-      result: '正常',
-      cost: 200,
-      createTime: '2025-03-20 09:00:00',
-      updateTime: '2025-03-20 10:00:00',
+      description: '园区主配电室设备维护，包括变压器、开关柜、继电保护等设备的定期检查和维护。配备智能监控系统，实时监测设备运行状态。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-15',
     },
     {
       id: '2',
-      deviceName: '门禁-01',
-      deviceCode: 'ACC001',
-      category: '门禁控制',
-      maintenanceType: '故障维修',
-      startTime: '2025-03-19 14:00:00',
-      endTime: '2025-03-19 16:00:00',
-      maintainer: '李四',
-      status: 'completed',
-      description: '更换读卡器',
-      result: '已修复',
-      cost: 500,
-      createTime: '2025-03-19 14:00:00',
-      updateTime: '2025-03-19 16:00:00',
+      name: '中央空调系统',
+      code: 'DM-002',
+      type: '暖通设备',
+      location: '综合服务楼',
+      status: 'warning',
+      lastMaintenanceTime: '2024-02-10',
+      nextMaintenanceTime: '2024-05-10',
+      maintainer: '李华',
+      maintenanceType: '定期维护',
+      description: '中央空调系统维护，包括主机、冷却塔、水泵等设备的定期检查和维护。配备温湿度监控系统，确保系统正常运行。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-10',
     },
     {
       id: '3',
-      deviceName: '传感器-01',
-      deviceCode: 'SEN001',
-      category: '环境监测',
+      name: '消防系统',
+      code: 'DM-003',
+      type: '消防设备',
+      location: '园区全域',
+      status: 'error',
+      lastMaintenanceTime: '2024-02-01',
+      nextMaintenanceTime: '2024-05-01',
+      maintainer: '王强',
       maintenanceType: '定期维护',
-      startTime: '2025-03-18 10:00:00',
-      endTime: '2025-03-18 11:00:00',
-      maintainer: '王五',
-      status: 'in_progress',
-      description: '校准传感器',
-      result: '进行中',
-      cost: 300,
-      createTime: '2025-03-18 10:00:00',
-      updateTime: '2025-03-18 11:00:00',
+      description: '消防系统维护，包括消防泵、喷淋系统、烟感器等设备的定期检查和维护。配备消防监控系统，确保消防安全。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-01',
     },
-  ];
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'completed':
-        return 'success';
-      case 'in_progress':
-        return 'processing';
-      case 'scheduled':
-        return 'warning';
-      default:
-        return 'default';
-    }
-  };
+    {
+      id: '4',
+      name: '安防监控系统',
+      code: 'DM-004',
+      type: '安防设备',
+      location: '园区全域',
+      status: 'normal',
+      lastMaintenanceTime: '2024-02-20',
+      nextMaintenanceTime: '2024-05-20',
+      maintainer: '赵阳',
+      maintenanceType: '定期维护',
+      description: '安防监控系统维护，包括摄像头、存储设备、监控平台等设备的定期检查和维护。配备智能安防系统，确保园区安全。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '5',
+      name: '电梯系统',
+      code: 'DM-005',
+      type: '电梯设备',
+      location: '综合服务楼',
+      status: 'normal',
+      lastMaintenanceTime: '2024-02-18',
+      nextMaintenanceTime: '2024-05-18',
+      maintainer: '刘芳',
+      maintenanceType: '定期维护',
+      description: '电梯系统维护，包括电梯主机、控制系统、安全装置等设备的定期检查和维护。配备电梯监控系统，确保运行安全。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-18',
+    },
+    {
+      id: '6',
+      name: '给排水系统',
+      code: 'DM-006',
+      type: '给排水设备',
+      location: '园区全域',
+      status: 'normal',
+      lastMaintenanceTime: '2024-02-16',
+      nextMaintenanceTime: '2024-05-16',
+      maintainer: '陈伟',
+      maintenanceType: '定期维护',
+      description: '给排水系统维护，包括水泵、管道、阀门等设备的定期检查和维护。配备水质监测系统，确保供水安全。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-16',
+    },
+    {
+      id: '7',
+      name: '门禁系统',
+      code: 'DM-007',
+      type: '安防设备',
+      location: '园区全域',
+      status: 'warning',
+      lastMaintenanceTime: '2024-02-14',
+      nextMaintenanceTime: '2024-05-14',
+      maintainer: '杨丽',
+      maintenanceType: '定期维护',
+      description: '门禁系统维护，包括读卡器、控制器、门锁等设备的定期检查和维护。配备门禁管理系统，确保出入安全。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-14',
+    },
+    {
+      id: '8',
+      name: '网络设备',
+      code: 'DM-008',
+      type: '网络设备',
+      location: '数据中心',
+      status: 'normal',
+      lastMaintenanceTime: '2024-02-12',
+      nextMaintenanceTime: '2024-05-12',
+      maintainer: '周思',
+      maintenanceType: '定期维护',
+      description: '网络设备维护，包括交换机、路由器、防火墙等设备的定期检查和维护。配备网络监控系统，确保网络稳定。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-12',
+    },
+    {
+      id: '9',
+      name: '照明系统',
+      code: 'DM-009',
+      type: '照明设备',
+      location: '园区全域',
+      status: 'normal',
+      lastMaintenanceTime: '2024-02-10',
+      nextMaintenanceTime: '2024-05-10',
+      maintainer: '吴霞',
+      maintenanceType: '定期维护',
+      description: '照明系统维护，包括灯具、控制器、传感器等设备的定期检查和维护。配备智能照明系统，实现节能控制。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-10',
+    },
+    {
+      id: '10',
+      name: '停车场系统',
+      code: 'DM-010',
+      type: '停车设备',
+      location: '地下停车场',
+      status: 'normal',
+      lastMaintenanceTime: '2024-02-08',
+      nextMaintenanceTime: '2024-05-08',
+      maintainer: '李智',
+      maintenanceType: '定期维护',
+      description: '停车场系统维护，包括道闸、收费系统、监控设备等设备的定期检查和维护。配备智能停车系统，提高管理效率。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-08',
+    },
+  ]);
 
   const columns = [
     {
-      title: '设备名称',
-      dataIndex: 'deviceName',
-      key: 'deviceName',
-      width: 150,
+      title: '名称',
+      dataIndex: 'name',
+      key: 'name',
     },
     {
-      title: '设备编号',
-      dataIndex: 'deviceCode',
-      key: 'deviceCode',
-      width: 120,
+      title: '编号',
+      dataIndex: 'code',
+      key: 'code',
     },
     {
-      title: '类别',
-      dataIndex: 'category',
-      key: 'category',
-      width: 120,
+      title: '类型',
+      dataIndex: 'type',
+      key: 'type',
     },
     {
-      title: '维护类型',
-      dataIndex: 'maintenanceType',
-      key: 'maintenanceType',
-      width: 120,
-    },
-    {
-      title: '开始时间',
-      dataIndex: 'startTime',
-      key: 'startTime',
-      width: 180,
-    },
-    {
-      title: '结束时间',
-      dataIndex: 'endTime',
-      key: 'endTime',
-      width: 180,
-    },
-    {
-      title: '维护人员',
-      dataIndex: 'maintainer',
-      key: 'maintainer',
-      width: 120,
+      title: '位置',
+      dataIndex: 'location',
+      key: 'location',
     },
     {
       title: '状态',
       dataIndex: 'status',
       key: 'status',
-      width: 100,
-      render: (status: string) => (
-        <Tag color={getStatusColor(status)}>
-          {status === 'completed' ? '已完成' : status === 'in_progress' ? '进行中' : '已计划'}
-        </Tag>
-      ),
+      render: (status: string) => {
+        const statusMap = {
+          normal: { color: 'success', text: '正常' },
+          warning: { color: 'warning', text: '警告' },
+          error: { color: 'error', text: '故障' },
+        };
+        const { color, text } = statusMap[status as keyof typeof statusMap];
+        return <Tag color={color}>{text}</Tag>;
+      },
     },
     {
-      title: '描述',
-      dataIndex: 'description',
-      key: 'description',
-      width: 150,
+      title: '上次维护时间',
+      dataIndex: 'lastMaintenanceTime',
+      key: 'lastMaintenanceTime',
     },
     {
-      title: '结果',
-      dataIndex: 'result',
-      key: 'result',
-      width: 100,
+      title: '下次维护时间',
+      dataIndex: 'nextMaintenanceTime',
+      key: 'nextMaintenanceTime',
     },
     {
-      title: '费用',
-      dataIndex: 'cost',
-      key: 'cost',
-      width: 100,
-      render: (cost: number) => `¥${cost.toFixed(2)}`,
+      title: '维护人员',
+      dataIndex: 'maintainer',
+      key: 'maintainer',
+    },
+    {
+      title: '维护类型',
+      dataIndex: 'maintenanceType',
+      key: 'maintenanceType',
     },
     {
       title: '操作',
       key: 'action',
-      width: 150,
-      render: (_: any, record: MaintenanceData) => (
-        <Space>
+      render: (_: any, record: DeviceMaintenanceData) => (
+        <Space size="middle">
           <Button
             type="link"
             icon={<EditOutlined />}
@@ -191,23 +281,18 @@ const DeviceMaintenance: React.FC = () => {
     },
   ];
 
-  const handleAdd = () => {
-    setEditingId(null);
-    form.resetFields();
-    setModalVisible(true);
-  };
-
-  const handleEdit = (record: MaintenanceData) => {
+  const handleEdit = (record: DeviceMaintenanceData) => {
     setEditingId(record.id);
     form.setFieldsValue(record);
     setModalVisible(true);
   };
 
-  const handleDelete = (record: MaintenanceData) => {
+  const handleDelete = (record: DeviceMaintenanceData) => {
     Modal.confirm({
       title: '确认删除',
-      content: `确定要删除维护记录 ${record.deviceName} 吗？`,
+      content: `确定要删除设备维护记录 ${record.name} 吗？`,
       onOk() {
+        // 这里添加删除逻辑
         message.success('删除成功');
       },
     });
@@ -216,23 +301,34 @@ const DeviceMaintenance: React.FC = () => {
   const handleModalOk = () => {
     form.validateFields().then((values) => {
       setLoading(true);
-      // 模拟保存
+      // 这里添加保存逻辑
       setTimeout(() => {
         setLoading(false);
         setModalVisible(false);
-        message.success(editingId ? '更新成功' : '添加成功');
+        form.resetFields();
+        message.success('保存成功');
       }, 1000);
     });
   };
 
   return (
-    <div style={{ padding: '24px' }}>
-      <Row gutter={16} style={{ marginBottom: 16 }}>
+    <div>
+      <Row gutter={[16, 16]}>
         <Col span={6}>
           <Card>
             <Statistic
-              title="维护记录总数"
-              value={data.length}
+              title="总设备数"
+              value={maintenanceData.length}
+              prefix={<ToolOutlined />}
+            />
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card>
+            <Statistic
+              title="正常设备"
+              value={maintenanceData.filter((item) => item.status === 'normal').length}
+              prefix={<CheckCircleOutlined />}
               valueStyle={{ color: '#3f8600' }}
             />
           </Card>
@@ -240,17 +336,9 @@ const DeviceMaintenance: React.FC = () => {
         <Col span={6}>
           <Card>
             <Statistic
-              title="已完成维护"
-              value={data.filter(item => item.status === 'completed').length}
-              valueStyle={{ color: '#1890ff' }}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="进行中维护"
-              value={data.filter(item => item.status === 'in_progress').length}
+              title="警告设备"
+              value={maintenanceData.filter((item) => item.status === 'warning').length}
+              prefix={<WarningOutlined />}
               valueStyle={{ color: '#faad14' }}
             />
           </Card>
@@ -258,48 +346,46 @@ const DeviceMaintenance: React.FC = () => {
         <Col span={6}>
           <Card>
             <Statistic
-              title="总维护费用"
-              value={data.reduce((sum, item) => sum + item.cost, 0)}
-              precision={2}
-              prefix="¥"
+              title="故障设备"
+              value={maintenanceData.filter((item) => item.status === 'error').length}
+              prefix={<ClockCircleOutlined />}
               valueStyle={{ color: '#cf1322' }}
             />
           </Card>
         </Col>
       </Row>
 
-      <Card
-        title="设备维护"
-        extra={
-          <Space>
-            <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
-              添加维护记录
-            </Button>
-            <Button icon={<ReloadOutlined />}>
-              刷新
-            </Button>
-          </Space>
-        }
-      >
-        <Table 
-          columns={columns} 
-          dataSource={data}
+      <Card style={{ marginTop: 16 }}>
+        <Space style={{ marginBottom: 16 }}>
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            onClick={() => {
+              setEditingId(null);
+              form.resetFields();
+              setModalVisible(true);
+            }}
+          >
+            添加设备
+          </Button>
+          <Button icon={<ReloadOutlined />}>刷新</Button>
+        </Space>
+        <Table
+          columns={columns}
+          dataSource={maintenanceData}
           rowKey="id"
-          scroll={{ x: 1500 }}
-          pagination={{ 
-            pageSize: 10,
-            showQuickJumper: true,
-            showSizeChanger: true,
-            showTotal: (total) => `共 ${total} 条记录`
-          }}
+          scroll={{ x: true }}
         />
       </Card>
 
       <Modal
-        title={editingId ? '编辑维护记录' : '添加维护记录'}
+        title={editingId ? '编辑设备' : '添加设备'}
         open={modalVisible}
         onOk={handleModalOk}
-        onCancel={() => setModalVisible(false)}
+        onCancel={() => {
+          setModalVisible(false);
+          form.resetFields();
+        }}
         confirmLoading={loading}
       >
         <Form
@@ -307,28 +393,52 @@ const DeviceMaintenance: React.FC = () => {
           layout="vertical"
         >
           <Form.Item
-            name="deviceName"
-            label="设备名称"
-            rules={[{ required: true, message: '请输入设备名称' }]}
+            name="name"
+            label="名称"
+            rules={[{ required: true, message: '请输入名称' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            name="deviceCode"
-            label="设备编号"
-            rules={[{ required: true, message: '请输入设备编号' }]}
+            name="code"
+            label="编号"
+            rules={[{ required: true, message: '请输入编号' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            name="category"
-            label="设备类别"
-            rules={[{ required: true, message: '请选择设备类别' }]}
+            name="type"
+            label="类型"
+            rules={[{ required: true, message: '请选择类型' }]}
           >
             <Select>
-              <Select.Option value="视频监控">视频监控</Select.Option>
-              <Select.Option value="门禁控制">门禁控制</Select.Option>
-              <Select.Option value="环境监测">环境监测</Select.Option>
+              <Select.Option value="电力设备">电力设备</Select.Option>
+              <Select.Option value="暖通设备">暖通设备</Select.Option>
+              <Select.Option value="消防设备">消防设备</Select.Option>
+              <Select.Option value="安防设备">安防设备</Select.Option>
+              <Select.Option value="电梯设备">电梯设备</Select.Option>
+              <Select.Option value="给排水设备">给排水设备</Select.Option>
+              <Select.Option value="网络设备">网络设备</Select.Option>
+              <Select.Option value="照明设备">照明设备</Select.Option>
+              <Select.Option value="停车设备">停车设备</Select.Option>
+            </Select>
+          </Form.Item>
+          <Form.Item
+            name="location"
+            label="位置"
+            rules={[{ required: true, message: '请输入位置' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="status"
+            label="状态"
+            rules={[{ required: true, message: '请选择状态' }]}
+          >
+            <Select>
+              <Select.Option value="normal">正常</Select.Option>
+              <Select.Option value="warning">警告</Select.Option>
+              <Select.Option value="error">故障</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item
@@ -339,15 +449,8 @@ const DeviceMaintenance: React.FC = () => {
             <Select>
               <Select.Option value="定期维护">定期维护</Select.Option>
               <Select.Option value="故障维修">故障维修</Select.Option>
-              <Select.Option value="升级改造">升级改造</Select.Option>
+              <Select.Option value="预防性维护">预防性维护</Select.Option>
             </Select>
-          </Form.Item>
-          <Form.Item
-            name="time"
-            label="维护时间"
-            rules={[{ required: true, message: '请选择维护时间' }]}
-          >
-            <RangePicker showTime />
           </Form.Item>
           <Form.Item
             name="maintainer"
@@ -357,36 +460,10 @@ const DeviceMaintenance: React.FC = () => {
             <Input />
           </Form.Item>
           <Form.Item
-            name="status"
-            label="状态"
-            rules={[{ required: true, message: '请选择状态' }]}
-          >
-            <Select>
-              <Select.Option value="completed">已完成</Select.Option>
-              <Select.Option value="in_progress">进行中</Select.Option>
-              <Select.Option value="scheduled">已计划</Select.Option>
-            </Select>
-          </Form.Item>
-          <Form.Item
             name="description"
-            label="维护描述"
-            rules={[{ required: true, message: '请输入维护描述' }]}
+            label="描述"
           >
-            <Input.TextArea rows={4} />
-          </Form.Item>
-          <Form.Item
-            name="result"
-            label="维护结果"
-            rules={[{ required: true, message: '请输入维护结果' }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="cost"
-            label="维护费用"
-            rules={[{ required: true, message: '请输入维护费用' }]}
-          >
-            <Input type="number" prefix="¥" />
+            <Input.TextArea />
           </Form.Item>
         </Form>
       </Modal>

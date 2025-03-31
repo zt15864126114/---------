@@ -32,11 +32,8 @@ interface WirelessData {
   type: string;
   location: string;
   status: string;
-  frequency: string;
-  channel: string;
-  maxConnections: number;
-  currentConnections: number;
-  signalStrength: string;
+  capacity: number;
+  currentUsers: number;
   lastMaintenanceTime: string;
   nextMaintenanceTime: string;
   maintainer: string;
@@ -55,60 +52,163 @@ const WirelessNetwork: React.FC = () => {
   const [wirelessData] = useState<WirelessData[]>([
     {
       id: '1',
-      name: '主楼WiFi',
-      code: 'WIFI-001',
+      name: '园区主无线网络',
+      code: 'WN-001',
       type: 'WiFi 6',
-      location: '主楼1层',
+      location: '园区全域',
       status: 'normal',
-      frequency: '5GHz',
-      channel: '36',
-      maxConnections: 200,
-      currentConnections: 150,
-      signalStrength: '强',
+      capacity: 5000,
+      currentUsers: 1200,
       lastMaintenanceTime: '2024-02-15',
       nextMaintenanceTime: '2024-05-15',
-      maintainer: '张三',
-      description: '主楼办公区无线网络',
+      maintainer: '张明',
+      description: '园区主无线网络，采用WiFi 6技术，支持多用户MIMO和OFDMA。配备智能网络管理系统，支持自动负载均衡。覆盖面积50万平方米，支持5000个并发用户。',
       createTime: '2024-01-01',
       updateTime: '2024-02-15',
     },
     {
       id: '2',
-      name: '副楼WiFi',
-      code: 'WIFI-002',
-      type: 'WiFi 5',
-      location: '副楼2层',
+      name: '研发区专用网络',
+      code: 'WN-002',
+      type: 'WiFi 6E',
+      location: '研发中心大楼',
       status: 'warning',
-      frequency: '2.4GHz',
-      channel: '6',
-      maxConnections: 100,
-      currentConnections: 95,
-      signalStrength: '中',
+      capacity: 2000,
+      currentUsers: 800,
       lastMaintenanceTime: '2024-02-10',
       nextMaintenanceTime: '2024-05-10',
-      maintainer: '李四',
-      description: '副楼办公区无线网络',
+      maintainer: '李华',
+      description: '研发区专用无线网络，采用WiFi 6E技术，支持6GHz频段。配备研发专用网络管理系统，支持研发数据安全传输。覆盖研发中心大楼，支持2000个并发用户。',
       createTime: '2024-01-01',
       updateTime: '2024-02-10',
     },
     {
       id: '3',
-      name: '会议室WiFi',
-      code: 'WIFI-003',
+      name: '会议室无线网络',
+      code: 'WN-003',
       type: 'WiFi 6',
-      location: '会议室区域',
+      location: '综合服务楼会议室',
       status: 'error',
-      frequency: '5GHz',
-      channel: '44',
-      maxConnections: 50,
-      currentConnections: 0,
-      signalStrength: '弱',
+      capacity: 500,
+      currentUsers: 300,
       lastMaintenanceTime: '2024-02-01',
       nextMaintenanceTime: '2024-05-01',
-      maintainer: '王五',
-      description: '会议室专用无线网络',
+      maintainer: '王强',
+      description: '会议室专用无线网络，采用WiFi 6技术，支持高清视频会议。配备会议网络管理系统，支持会议数据加密传输。覆盖30间会议室，支持500个并发用户。',
       createTime: '2024-01-01',
       updateTime: '2024-02-01',
+    },
+    {
+      id: '4',
+      name: '访客无线网络',
+      code: 'WN-004',
+      type: 'WiFi 5',
+      location: '园区公共区域',
+      status: 'normal',
+      capacity: 1000,
+      currentUsers: 400,
+      lastMaintenanceTime: '2024-02-20',
+      nextMaintenanceTime: '2024-05-20',
+      maintainer: '赵阳',
+      description: '访客专用无线网络，采用WiFi 5技术，支持访客认证和限速。配备访客网络管理系统，支持访客行为监控。覆盖园区公共区域，支持1000个并发用户。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '5',
+      name: '物联网专用网络',
+      code: 'WN-005',
+      type: 'LoRa',
+      location: '园区全域',
+      status: 'normal',
+      capacity: 10000,
+      currentUsers: 5000,
+      lastMaintenanceTime: '2024-02-18',
+      nextMaintenanceTime: '2024-05-18',
+      maintainer: '刘芳',
+      description: '物联网设备专用网络，采用LoRa技术，支持低功耗广域网。配备物联网管理平台，支持设备远程管理。覆盖园区全域，支持10000个物联网设备接入。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-18',
+    },
+    {
+      id: '6',
+      name: '安防监控网络',
+      code: 'WN-006',
+      type: 'WiFi 6',
+      location: '园区安防区域',
+      status: 'normal',
+      capacity: 200,
+      currentUsers: 150,
+      lastMaintenanceTime: '2024-02-16',
+      nextMaintenanceTime: '2024-05-16',
+      maintainer: '陈伟',
+      description: '安防监控专用网络，采用WiFi 6技术，支持高清视频传输。配备安防网络管理系统，支持实时监控和智能分析。覆盖安防监控区域，支持200个监控设备接入。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-16',
+    },
+    {
+      id: '7',
+      name: '停车场无线网络',
+      code: 'WN-007',
+      type: 'WiFi 5',
+      location: '地下停车场',
+      status: 'warning',
+      capacity: 300,
+      currentUsers: 250,
+      lastMaintenanceTime: '2024-02-14',
+      nextMaintenanceTime: '2024-05-14',
+      maintainer: '杨丽',
+      description: '停车场专用无线网络，采用WiFi 5技术，支持车位引导和收费管理。配备停车场网络管理系统，支持车牌识别和自动收费。覆盖地下停车场，支持300个并发用户。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-14',
+    },
+    {
+      id: '8',
+      name: '员工宿舍网络',
+      code: 'WN-008',
+      type: 'WiFi 6',
+      location: '人才公寓',
+      status: 'normal',
+      capacity: 1000,
+      currentUsers: 800,
+      lastMaintenanceTime: '2024-02-12',
+      nextMaintenanceTime: '2024-05-12',
+      maintainer: '周思',
+      description: '员工宿舍专用网络，采用WiFi 6技术，支持高速上网和视频娱乐。配备宿舍网络管理系统，支持流量控制和内容过滤。覆盖人才公寓，支持1000个并发用户。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-12',
+    },
+    {
+      id: '9',
+      name: '餐厅无线网络',
+      code: 'WN-009',
+      type: 'WiFi 5',
+      location: '员工餐厅',
+      status: 'normal',
+      capacity: 500,
+      currentUsers: 300,
+      lastMaintenanceTime: '2024-02-10',
+      nextMaintenanceTime: '2024-05-10',
+      maintainer: '吴霞',
+      description: '餐厅专用无线网络，采用WiFi 5技术，支持移动支付和在线点餐。配备餐厅网络管理系统，支持支付安全和流量控制。覆盖员工餐厅，支持500个并发用户。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-10',
+    },
+    {
+      id: '10',
+      name: '休闲区无线网络',
+      code: 'WN-010',
+      type: 'WiFi 5',
+      location: '园区休闲区',
+      status: 'normal',
+      capacity: 800,
+      currentUsers: 400,
+      lastMaintenanceTime: '2024-02-08',
+      nextMaintenanceTime: '2024-05-08',
+      maintainer: '李智',
+      description: '休闲区专用无线网络，采用WiFi 5技术，支持休闲娱乐和社交网络。配备休闲区网络管理系统，支持内容过滤和流量控制。覆盖园区休闲区，支持800个并发用户。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-08',
     },
   ]);
 
@@ -148,24 +248,14 @@ const WirelessNetwork: React.FC = () => {
       },
     },
     {
-      title: '频段',
-      dataIndex: 'frequency',
-      key: 'frequency',
+      title: '容量',
+      dataIndex: 'capacity',
+      key: 'capacity',
     },
     {
-      title: '信道',
-      dataIndex: 'channel',
-      key: 'channel',
-    },
-    {
-      title: '连接数',
-      key: 'connections',
-      render: (record: WirelessData) => `${record.currentConnections}/${record.maxConnections}`,
-    },
-    {
-      title: '信号强度',
-      dataIndex: 'signalStrength',
-      key: 'signalStrength',
+      title: '当前用户数',
+      dataIndex: 'currentUsers',
+      key: 'currentUsers',
     },
     {
       title: '最后维护时间',
@@ -339,7 +429,9 @@ const WirelessNetwork: React.FC = () => {
           >
             <Select>
               <Select.Option value="WiFi 6">WiFi 6</Select.Option>
+              <Select.Option value="WiFi 6E">WiFi 6E</Select.Option>
               <Select.Option value="WiFi 5">WiFi 5</Select.Option>
+              <Select.Option value="LoRa">LoRa</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item
@@ -361,46 +453,18 @@ const WirelessNetwork: React.FC = () => {
             </Select>
           </Form.Item>
           <Form.Item
-            name="frequency"
-            label="频段"
-            rules={[{ required: true, message: '请选择频段' }]}
-          >
-            <Select>
-              <Select.Option value="2.4GHz">2.4GHz</Select.Option>
-              <Select.Option value="5GHz">5GHz</Select.Option>
-            </Select>
-          </Form.Item>
-          <Form.Item
-            name="channel"
-            label="信道"
-            rules={[{ required: true, message: '请输入信道' }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="maxConnections"
-            label="最大连接数"
-            rules={[{ required: true, message: '请输入最大连接数' }]}
+            name="capacity"
+            label="容量"
+            rules={[{ required: true, message: '请输入容量' }]}
           >
             <Input type="number" />
           </Form.Item>
           <Form.Item
-            name="currentConnections"
-            label="当前连接数"
-            rules={[{ required: true, message: '请输入当前连接数' }]}
+            name="currentUsers"
+            label="当前用户数"
+            rules={[{ required: true, message: '请输入当前用户数' }]}
           >
             <Input type="number" />
-          </Form.Item>
-          <Form.Item
-            name="signalStrength"
-            label="信号强度"
-            rules={[{ required: true, message: '请选择信号强度' }]}
-          >
-            <Select>
-              <Select.Option value="强">强</Select.Option>
-              <Select.Option value="中">中</Select.Option>
-              <Select.Option value="弱">弱</Select.Option>
-            </Select>
           </Form.Item>
           <Form.Item
             name="maintainer"

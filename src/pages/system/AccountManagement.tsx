@@ -5,15 +5,15 @@ import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 interface AccountData {
   id: string;
   username: string;
-  realName: string;
-  department: string;
+  name: string;
   role: string;
-  email: string;
-  phone: string;
+  department: string;
   status: string;
   lastLoginTime: string;
+  lastLoginIp: string;
   createTime: string;
   updateTime: string;
+  description: string;
 }
 
 const AccountManagement: React.FC = () => {
@@ -22,47 +22,164 @@ const AccountManagement: React.FC = () => {
   const [editingId, setEditingId] = useState<string | null>(null);
 
   // 模拟账号数据
-  const data: AccountData[] = [
+  const [accountData] = useState<AccountData[]>([
     {
       id: '1',
       username: 'admin',
-      realName: '系统管理员',
-      department: '技术部',
-      role: '系统管理员',
-      email: 'admin@example.com',
-      phone: '13800138000',
+      name: '系统管理员',
+      role: '超级管理员',
+      department: '信息技术部',
       status: 'active',
-      lastLoginTime: '2025-03-20 09:00:00',
-      createTime: '2025-03-20 09:00:00',
-      updateTime: '2025-03-20 09:00:00',
+      lastLoginTime: '2024-02-20 14:30:00',
+      lastLoginIp: '192.168.1.100',
+      createTime: '2024-01-01 09:00:00',
+      updateTime: '2024-02-20 14:30:00',
+      description: '系统最高权限管理员，负责系统维护和权限管理。具有10年系统管理经验，精通各类操作系统和数据库管理。',
     },
     {
       id: '2',
-      username: 'user1',
-      realName: '张三',
-      department: '销售部',
-      role: '普通用户',
-      email: 'zhangsan@example.com',
-      phone: '13800138001',
+      username: 'zhangming',
+      name: '张明',
+      role: '部门管理员',
+      department: '研发部',
       status: 'active',
-      lastLoginTime: '2025-03-20 08:30:00',
-      createTime: '2025-03-20 09:00:00',
-      updateTime: '2025-03-20 09:00:00',
+      lastLoginTime: '2024-02-20 15:45:00',
+      lastLoginIp: '192.168.1.101',
+      createTime: '2024-01-01 09:00:00',
+      updateTime: '2024-02-20 15:45:00',
+      description: '研发部负责人，负责部门日常管理和技术决策。清华大学计算机系博士，具有8年研发管理经验。',
     },
     {
       id: '3',
-      username: 'user2',
-      realName: '李四',
-      department: '人事部',
-      role: '普通用户',
-      email: 'lisi@example.com',
-      phone: '13800138002',
-      status: 'active',
-      lastLoginTime: '2025-03-20 08:00:00',
-      createTime: '2025-03-20 09:00:00',
-      updateTime: '2025-03-20 09:00:00',
+      username: 'lihua',
+      name: '李华',
+      role: '部门管理员',
+      department: '运营部',
+      status: 'inactive',
+      lastLoginTime: '2024-02-19 16:20:00',
+      lastLoginIp: '192.168.1.102',
+      createTime: '2024-01-01 09:00:00',
+      updateTime: '2024-02-19 16:20:00',
+      description: '运营部负责人，负责园区日常运营管理。山东大学工商管理硕士，具有6年运营管理经验。',
     },
-  ];
+    {
+      id: '4',
+      username: 'wangqiang',
+      name: '王强',
+      role: '部门管理员',
+      department: '市场部',
+      status: 'active',
+      lastLoginTime: '2024-02-20 10:15:00',
+      lastLoginIp: '192.168.1.103',
+      createTime: '2024-01-01 09:00:00',
+      updateTime: '2024-02-20 10:15:00',
+      description: '市场部负责人，负责市场推广和品牌建设。北京大学市场营销硕士，具有10年市场营销经验。',
+    },
+    {
+      id: '5',
+      username: 'zhaoyang',
+      name: '赵阳',
+      role: '部门管理员',
+      department: '人力资源部',
+      status: 'active',
+      lastLoginTime: '2024-02-20 11:30:00',
+      lastLoginIp: '192.168.1.104',
+      createTime: '2024-01-01 09:00:00',
+      updateTime: '2024-02-20 11:30:00',
+      description: '人力资源部负责人，负责人才招聘和培训管理。中国人民大学人力资源管理硕士，具有8年HR管理经验。',
+    },
+    {
+      id: '6',
+      username: 'liufang',
+      name: '刘芳',
+      role: '部门管理员',
+      department: '财务部',
+      status: 'active',
+      lastLoginTime: '2024-02-20 13:45:00',
+      lastLoginIp: '192.168.1.105',
+      createTime: '2024-01-01 09:00:00',
+      updateTime: '2024-02-20 13:45:00',
+      description: '财务部负责人，负责财务管理和预算控制。上海财经大学会计学硕士，注册会计师，具有12年财务管理经验。',
+    },
+    {
+      id: '7',
+      username: 'chenwei',
+      name: '陈伟',
+      role: '普通用户',
+      department: '研发部',
+      status: 'active',
+      lastLoginTime: '2024-02-20 09:15:00',
+      lastLoginIp: '192.168.1.106',
+      createTime: '2024-01-15 09:00:00',
+      updateTime: '2024-02-20 09:15:00',
+      description: '高级软件工程师，负责核心系统开发。浙江大学计算机系硕士，具有5年开发经验，精通Java和Python。',
+    },
+    {
+      id: '8',
+      username: 'yangli',
+      name: '杨丽',
+      role: '普通用户',
+      department: '运营部',
+      status: 'locked',
+      lastLoginTime: '2024-02-19 17:30:00',
+      lastLoginIp: '192.168.1.107',
+      createTime: '2024-01-15 09:00:00',
+      updateTime: '2024-02-19 17:30:00',
+      description: '设备维护工程师，负责园区设备维护。山东科技大学自动化专业本科，具有3年设备维护经验。',
+    },
+    {
+      id: '9',
+      username: 'zhousi',
+      name: '周思',
+      role: '普通用户',
+      department: '市场部',
+      status: 'active',
+      lastLoginTime: '2024-02-20 16:20:00',
+      lastLoginIp: '192.168.1.108',
+      createTime: '2024-01-15 09:00:00',
+      updateTime: '2024-02-20 16:20:00',
+      description: '市场专员，负责客户关系管理。南京大学市场营销专业本科，具有4年市场工作经验。',
+    },
+    {
+      id: '10',
+      username: 'wuxia',
+      name: '吴霞',
+      role: '普通用户',
+      department: '人力资源部',
+      status: 'active',
+      lastLoginTime: '2024-02-20 14:45:00',
+      lastLoginIp: '192.168.1.109',
+      createTime: '2024-01-15 09:00:00',
+      updateTime: '2024-02-20 14:45:00',
+      description: '招聘专员，负责人才招聘。武汉大学人力资源管理专业本科，具有3年招聘经验。',
+    },
+    {
+      id: '11',
+      username: 'lizhi',
+      name: '李智',
+      role: '普通用户',
+      department: '财务部',
+      status: 'active',
+      lastLoginTime: '2024-02-20 15:30:00',
+      lastLoginIp: '192.168.1.110',
+      createTime: '2024-01-15 09:00:00',
+      updateTime: '2024-02-20 15:30:00',
+      description: '会计主管，负责日常会计核算。中南财经政法大学会计学本科，具有5年会计工作经验。',
+    },
+    {
+      id: '12',
+      username: 'sunyang',
+      name: '孙阳',
+      role: '普通用户',
+      department: '研发部',
+      status: 'inactive',
+      lastLoginTime: '2024-02-18 16:45:00',
+      lastLoginIp: '192.168.1.111',
+      createTime: '2024-01-15 09:00:00',
+      updateTime: '2024-02-18 16:45:00',
+      description: '测试工程师，负责系统测试。西安电子科技大学软件工程专业本科，具有3年测试经验。',
+    },
+  ]);
 
   const columns = [
     {
@@ -73,8 +190,8 @@ const AccountManagement: React.FC = () => {
     },
     {
       title: '姓名',
-      dataIndex: 'realName',
-      key: 'realName',
+      dataIndex: 'name',
+      key: 'name',
       width: 120,
     },
     {
@@ -87,18 +204,6 @@ const AccountManagement: React.FC = () => {
       title: '角色',
       dataIndex: 'role',
       key: 'role',
-      width: 120,
-    },
-    {
-      title: '邮箱',
-      dataIndex: 'email',
-      key: 'email',
-      width: 180,
-    },
-    {
-      title: '手机号',
-      dataIndex: 'phone',
-      key: 'phone',
       width: 120,
     },
     {
@@ -116,6 +221,12 @@ const AccountManagement: React.FC = () => {
       title: '最后登录时间',
       dataIndex: 'lastLoginTime',
       key: 'lastLoginTime',
+      width: 180,
+    },
+    {
+      title: '最后登录IP',
+      dataIndex: 'lastLoginIp',
+      key: 'lastLoginIp',
       width: 180,
     },
     {
@@ -180,7 +291,7 @@ const AccountManagement: React.FC = () => {
           <Card>
             <Statistic
               title="账号总数"
-              value={data.length}
+              value={accountData.length}
               valueStyle={{ color: '#3f8600' }}
             />
           </Card>
@@ -189,7 +300,7 @@ const AccountManagement: React.FC = () => {
           <Card>
             <Statistic
               title="启用账号"
-              value={data.filter(item => item.status === 'active').length}
+              value={accountData.filter(item => item.status === 'active').length}
               valueStyle={{ color: '#3f8600' }}
             />
           </Card>
@@ -198,7 +309,7 @@ const AccountManagement: React.FC = () => {
           <Card>
             <Statistic
               title="今日登录"
-              value={data.filter(item => {
+              value={accountData.filter(item => {
                 const lastLogin = new Date(item.lastLoginTime);
                 const today = new Date();
                 return lastLogin.toDateString() === today.toDateString();
@@ -211,7 +322,7 @@ const AccountManagement: React.FC = () => {
           <Card>
             <Statistic
               title="部门数量"
-              value={new Set(data.map(item => item.department)).size}
+              value={new Set(accountData.map(item => item.department)).size}
               valueStyle={{ color: '#faad14' }}
             />
           </Card>
@@ -228,7 +339,7 @@ const AccountManagement: React.FC = () => {
       >
         <Table 
           columns={columns} 
-          dataSource={data}
+          dataSource={accountData}
           rowKey="id"
           scroll={{ x: 1500 }}
           pagination={{ 
@@ -263,7 +374,7 @@ const AccountManagement: React.FC = () => {
             <Input placeholder="请输入用户名" />
           </Form.Item>
           <Form.Item
-            name="realName"
+            name="name"
             label="姓名"
             rules={[{ required: true, message: '请输入姓名' }]}
           >
@@ -289,26 +400,6 @@ const AccountManagement: React.FC = () => {
               <Select.Option value="系统管理员">系统管理员</Select.Option>
               <Select.Option value="普通用户">普通用户</Select.Option>
             </Select>
-          </Form.Item>
-          <Form.Item
-            name="email"
-            label="邮箱"
-            rules={[
-              { required: true, message: '请输入邮箱' },
-              { type: 'email', message: '请输入正确的邮箱地址' }
-            ]}
-          >
-            <Input placeholder="请输入邮箱" />
-          </Form.Item>
-          <Form.Item
-            name="phone"
-            label="手机号"
-            rules={[
-              { required: true, message: '请输入手机号' },
-              { pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号码' }
-            ]}
-          >
-            <Input placeholder="请输入手机号" />
           </Form.Item>
           <Form.Item
             name="status"

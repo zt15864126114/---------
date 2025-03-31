@@ -21,7 +21,7 @@ const FaceTrack: React.FC = () => {
   const trackData: FaceTrack[] = [
     {
       id: '1',
-      userName: '张三',
+      userName: '李明华',
       userType: 'employee',
       location: '1号楼大厅',
       deviceName: '人脸识别设备-01',
@@ -30,7 +30,7 @@ const FaceTrack: React.FC = () => {
     },
     {
       id: '2',
-      userName: '李四',
+      userName: '王柳',
       userType: 'visitor',
       location: '2号楼侧门',
       deviceName: '人脸识别设备-02',

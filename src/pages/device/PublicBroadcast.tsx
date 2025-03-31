@@ -25,15 +25,15 @@ import {
   ClockCircleOutlined,
 } from '@ant-design/icons';
 
-interface BroadcastData {
+interface PublicBroadcastData {
   id: string;
   name: string;
   code: string;
   type: string;
   location: string;
   status: string;
-  power: string;
-  volume: string;
+  power: number;
+  coverage: string;
   lastMaintenanceTime: string;
   nextMaintenanceTime: string;
   maintainer: string;
@@ -49,54 +49,166 @@ const PublicBroadcast: React.FC = () => {
   const [editingId, setEditingId] = useState<string | null>(null);
 
   // 模拟公共广播数据
-  const [broadcastData] = useState<BroadcastData[]>([
+  const [broadcastData] = useState<PublicBroadcastData[]>([
     {
       id: '1',
-      name: '主楼大厅广播',
-      code: 'BC-001',
-      type: '数字广播',
-      location: '主楼1层大厅',
+      name: '园区主广播系统',
+      code: 'PB-001',
+      type: '数字广播系统',
+      location: '园区全域',
       status: 'normal',
-      power: '100W',
-      volume: '80%',
+      power: 1000,
+      coverage: '50万平方米',
       lastMaintenanceTime: '2024-02-15',
       nextMaintenanceTime: '2024-05-15',
-      maintainer: '张三',
-      description: '主楼大厅公共广播系统',
+      maintainer: '张明',
+      description: '园区主广播系统，采用数字广播技术，支持分区广播和紧急广播。配备智能广播管理系统，支持定时广播和远程控制。覆盖面积50万平方米，支持多区域独立控制。',
       createTime: '2024-01-01',
       updateTime: '2024-02-15',
     },
     {
       id: '2',
-      name: '园区广场广播',
-      code: 'BC-002',
-      type: '数字广播',
-      location: '园区中心广场',
+      name: '研发区广播系统',
+      code: 'PB-002',
+      type: '智能广播系统',
+      location: '研发中心大楼',
       status: 'warning',
-      power: '200W',
-      volume: '60%',
+      power: 500,
+      coverage: '20万平方米',
       lastMaintenanceTime: '2024-02-10',
       nextMaintenanceTime: '2024-05-10',
-      maintainer: '李四',
-      description: '园区广场公共广播系统',
+      maintainer: '李华',
+      description: '研发区智能广播系统，采用智能广播技术，支持语音识别和自动广播。配备研发区专用广播系统，支持研发通知和紧急疏散。覆盖研发中心大楼，支持多楼层独立控制。',
       createTime: '2024-01-01',
       updateTime: '2024-02-10',
     },
     {
       id: '3',
-      name: '停车场广播',
-      code: 'BC-003',
-      type: '数字广播',
-      location: '地下停车场',
+      name: '会议室广播系统',
+      code: 'PB-003',
+      type: '会议广播系统',
+      location: '综合服务楼会议室',
       status: 'error',
-      power: '50W',
-      volume: '0%',
+      power: 200,
+      coverage: '5万平方米',
       lastMaintenanceTime: '2024-02-01',
       nextMaintenanceTime: '2024-05-01',
-      maintainer: '王五',
-      description: '停车场公共广播系统',
+      maintainer: '王强',
+      description: '会议室广播系统，采用会议广播技术，支持会议扩声和远程会议。配备会议管理系统，支持会议通知和紧急疏散。覆盖30间会议室，支持独立控制。',
       createTime: '2024-01-01',
       updateTime: '2024-02-01',
+    },
+    {
+      id: '4',
+      name: '餐厅广播系统',
+      code: 'PB-004',
+      type: '背景音乐系统',
+      location: '员工餐厅',
+      status: 'normal',
+      power: 300,
+      coverage: '10万平方米',
+      lastMaintenanceTime: '2024-02-20',
+      nextMaintenanceTime: '2024-05-20',
+      maintainer: '赵阳',
+      description: '餐厅广播系统，采用背景音乐技术，支持音乐播放和通知广播。配备餐厅管理系统，支持就餐通知和紧急疏散。覆盖员工餐厅，支持分区控制。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-20',
+    },
+    {
+      id: '5',
+      name: '宿舍区广播系统',
+      code: 'PB-005',
+      type: '智能广播系统',
+      location: '人才公寓',
+      status: 'normal',
+      power: 400,
+      coverage: '15万平方米',
+      lastMaintenanceTime: '2024-02-18',
+      nextMaintenanceTime: '2024-05-18',
+      maintainer: '刘芳',
+      description: '宿舍区广播系统，采用智能广播技术，支持定时广播和紧急通知。配备宿舍管理系统，支持生活通知和紧急疏散。覆盖人才公寓，支持多楼层独立控制。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-18',
+    },
+    {
+      id: '6',
+      name: '休闲区广播系统',
+      code: 'PB-006',
+      type: '背景音乐系统',
+      location: '园区休闲区',
+      status: 'normal',
+      power: 300,
+      coverage: '8万平方米',
+      lastMaintenanceTime: '2024-02-16',
+      nextMaintenanceTime: '2024-05-16',
+      maintainer: '陈伟',
+      description: '休闲区广播系统，采用背景音乐技术，支持音乐播放和环境营造。配备休闲区管理系统，支持活动通知和紧急疏散。覆盖园区休闲区，支持分区控制。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-16',
+    },
+    {
+      id: '7',
+      name: '停车场广播系统',
+      code: 'PB-007',
+      type: '紧急广播系统',
+      location: '地下停车场',
+      status: 'warning',
+      power: 200,
+      coverage: '12万平方米',
+      lastMaintenanceTime: '2024-02-14',
+      nextMaintenanceTime: '2024-05-14',
+      maintainer: '杨丽',
+      description: '停车场广播系统，采用紧急广播技术，支持车辆引导和紧急疏散。配备停车场管理系统，支持车位引导和紧急通知。覆盖地下停车场，支持分区控制。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-14',
+    },
+    {
+      id: '8',
+      name: '实验室广播系统',
+      code: 'PB-008',
+      type: '智能广播系统',
+      location: '研发实验室',
+      status: 'normal',
+      power: 300,
+      coverage: '10万平方米',
+      lastMaintenanceTime: '2024-02-12',
+      nextMaintenanceTime: '2024-05-12',
+      maintainer: '周思',
+      description: '实验室广播系统，采用智能广播技术，支持实验通知和安全预警。配备实验室管理系统，支持实验通知和紧急疏散。覆盖研发实验室，支持独立控制。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-12',
+    },
+    {
+      id: '9',
+      name: '数据中心广播系统',
+      code: 'PB-009',
+      type: '紧急广播系统',
+      location: '数据中心机房',
+      status: 'normal',
+      power: 200,
+      coverage: '5万平方米',
+      lastMaintenanceTime: '2024-02-10',
+      nextMaintenanceTime: '2024-05-10',
+      maintainer: '吴霞',
+      description: '数据中心广播系统，采用紧急广播技术，支持设备预警和紧急疏散。配备数据中心管理系统，支持设备预警和紧急通知。覆盖数据中心机房，支持独立控制。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-10',
+    },
+    {
+      id: '10',
+      name: '园区周界广播系统',
+      code: 'PB-010',
+      type: '数字广播系统',
+      location: '园区周界',
+      status: 'normal',
+      power: 800,
+      coverage: '30万平方米',
+      lastMaintenanceTime: '2024-02-08',
+      nextMaintenanceTime: '2024-05-08',
+      maintainer: '李智',
+      description: '园区周界广播系统，采用数字广播技术，支持安防预警和紧急通知。配备安防管理系统，支持入侵预警和紧急疏散。覆盖园区周界，支持分区控制。',
+      createTime: '2024-01-01',
+      updateTime: '2024-02-08',
     },
   ]);
 
@@ -139,11 +251,12 @@ const PublicBroadcast: React.FC = () => {
       title: '功率',
       dataIndex: 'power',
       key: 'power',
+      render: (power: number) => `${power}W`,
     },
     {
-      title: '音量',
-      dataIndex: 'volume',
-      key: 'volume',
+      title: '覆盖范围',
+      dataIndex: 'coverage',
+      key: 'coverage',
     },
     {
       title: '最后维护时间',
@@ -163,7 +276,7 @@ const PublicBroadcast: React.FC = () => {
     {
       title: '操作',
       key: 'action',
-      render: (_: any, record: BroadcastData) => (
+      render: (_: any, record: PublicBroadcastData) => (
         <Space size="middle">
           <Button
             type="link"
@@ -185,13 +298,13 @@ const PublicBroadcast: React.FC = () => {
     },
   ];
 
-  const handleEdit = (record: BroadcastData) => {
+  const handleEdit = (record: PublicBroadcastData) => {
     setEditingId(record.id);
     form.setFieldsValue(record);
     setModalVisible(true);
   };
 
-  const handleDelete = (record: BroadcastData) => {
+  const handleDelete = (record: PublicBroadcastData) => {
     Modal.confirm({
       title: '确认删除',
       content: `确定要删除公共广播 ${record.name} 吗？`,
@@ -316,8 +429,11 @@ const PublicBroadcast: React.FC = () => {
             rules={[{ required: true, message: '请选择类型' }]}
           >
             <Select>
-              <Select.Option value="数字广播">数字广播</Select.Option>
-              <Select.Option value="模拟广播">模拟广播</Select.Option>
+              <Select.Option value="数字广播系统">数字广播系统</Select.Option>
+              <Select.Option value="智能广播系统">智能广播系统</Select.Option>
+              <Select.Option value="会议广播系统">会议广播系统</Select.Option>
+              <Select.Option value="背景音乐系统">背景音乐系统</Select.Option>
+              <Select.Option value="紧急广播系统">紧急广播系统</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item
@@ -341,27 +457,16 @@ const PublicBroadcast: React.FC = () => {
           <Form.Item
             name="power"
             label="功率"
-            rules={[{ required: true, message: '请选择功率' }]}
+            rules={[{ required: true, message: '请输入功率' }]}
           >
-            <Select>
-              <Select.Option value="50W">50W</Select.Option>
-              <Select.Option value="100W">100W</Select.Option>
-              <Select.Option value="200W">200W</Select.Option>
-            </Select>
+            <Input type="number" />
           </Form.Item>
           <Form.Item
-            name="volume"
-            label="音量"
-            rules={[{ required: true, message: '请选择音量' }]}
+            name="coverage"
+            label="覆盖范围"
+            rules={[{ required: true, message: '请输入覆盖范围' }]}
           >
-            <Select>
-              <Select.Option value="0%">0%</Select.Option>
-              <Select.Option value="20%">20%</Select.Option>
-              <Select.Option value="40%">40%</Select.Option>
-              <Select.Option value="60%">60%</Select.Option>
-              <Select.Option value="80%">80%</Select.Option>
-              <Select.Option value="100%">100%</Select.Option>
-            </Select>
+            <Input />
           </Form.Item>
           <Form.Item
             name="maintainer"

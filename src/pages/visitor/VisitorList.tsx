@@ -34,14 +34,14 @@ const VisitorList: React.FC = () => {
   const data: VisitorData[] = [
     {
       id: '1',
-      visitorName: '张三',
+      visitorName: '李明华',
       visitorType: '商务访客',
       idType: '身份证',
       idNumber: '110101199001011234',
       phone: '13800138000',
       company: '科技有限公司',
       purpose: '商务洽谈',
-      host: '李四',
+      host: '王柳',
       department: '市场部',
       visitTime: '2025-03-20 09:00:00',
       leaveTime: '2025-03-20 11:00:00',

@@ -83,7 +83,7 @@ const AccessControl: React.FC = () => {
   const attendanceData: AttendanceRecord[] = [
     {
       id: '1',
-      employeeName: '张三',
+      employeeName: '李明华',
       employeeCode: 'EMP001',
       department: '技术部',
       checkInTime: '2025-03-20 08:30:00',
@@ -95,7 +95,7 @@ const AccessControl: React.FC = () => {
     },
     {
       id: '2',
-      employeeName: '李四',
+      employeeName: '王柳',
       employeeCode: 'EMP002',
       department: '销售部',
       checkInTime: '2025-03-20 09:15:00',
