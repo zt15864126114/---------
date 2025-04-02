@@ -112,38 +112,45 @@ const menuItems = [
     ],
   },
   {
+    key: 'wiring-system',
+    icon: <ApiOutlined />,
+    label: <Link to="/device/wiring">综合布线系统服务</Link>,
+  },
+  {
+    key: 'wireless-network',
+    icon: <WifiOutlined />,
+    label: <Link to="/device/wireless">无线网络及网络安全系统</Link>,
+  },
+  {
+    key: 'video-surveillance',
+    icon: <VideoCameraOutlined />,
+    label: <Link to="/device/video">视频监控系统服务</Link>,
+  },
+  {
+    key: 'access-control',
+    icon: <LockOutlined />,
+    label: <Link to="/device/access">门禁及考勤管理系统服务</Link>,
+  },
+  {
+    key: 'public-broadcast',
+    icon: <SoundOutlined />,
+    label: <Link to="/device/broadcast">公共广播系统服务</Link>,
+  },
+  {
+    key: 'patrol-point',
+    icon: <CheckCircleOutlined />,
+    label: <Link to="/device/patrol">电子巡更点服务</Link>,
+  },
+  {
+    key: 'smart-meeting',
+    icon: <TeamOutlinedIcon />,
+    label: <Link to="/device/meeting">智慧会议系统服务</Link>,
+  },
+  {
     key: 'device',
     icon: <DesktopOutlined />,
     label: '设备管理',
     children: [
-      {
-        key: 'wiring-system',
-        label: <Link to="/device/wiring">布线系统</Link>,
-      },
-      {
-        key: 'wireless-network',
-        label: <Link to="/device/wireless">无线网络</Link>,
-      },
-      {
-        key: 'video-surveillance',
-        label: <Link to="/device/video">视频监控</Link>,
-      },
-      {
-        key: 'access-control',
-        label: <Link to="/device/access">门禁系统</Link>,
-      },
-      {
-        key: 'public-broadcast',
-        label: <Link to="/device/broadcast">公共广播</Link>,
-      },
-      {
-        key: 'patrol-point',
-        label: <Link to="/device/patrol">巡更点位</Link>,
-      },
-      {
-        key: 'smart-meeting',
-        label: <Link to="/device/meeting">智能会议</Link>,
-      },
       {
         key: 'device-list',
         label: <Link to="/device/list">设备列表</Link>,
@@ -161,7 +168,7 @@ const menuItems = [
   {
     key: 'visitor',
     icon: <TeamOutlined />,
-    label: '访客管理',
+    label: '出入口与访客系统服务',
     children: [
       {
         key: 'visitor-system',
@@ -184,7 +191,19 @@ const App: React.FC = () => {
     <Router>
       <Layout style={{ minHeight: '100vh' }}>
         <Sider width={250} theme="dark">
-          <div style={{ height: 32, margin: 16, background: 'rgba(255, 255, 255, 0.2)' }} />
+          <div style={{ 
+            height: 32, 
+            margin: 16, 
+            background: 'rgba(255, 255, 255, 0.2)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#fff',
+            fontSize: '16px',
+            fontWeight: 'bold'
+          }}>
+            山东新高地智慧园
+          </div>
           <Menu
             theme="dark"
             mode="inline"
