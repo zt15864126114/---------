@@ -21,7 +21,7 @@ const PersonSync: React.FC = () => {
       name: '李明华',
       type: 'employee',
       department: '技术部',
-      syncTime: '2024-03-20 10:00:00',
+      syncTime: '2025-03-20 10:00:00',
       status: 'success',
       progress: 100
     },
@@ -30,7 +30,7 @@ const PersonSync: React.FC = () => {
       name: '王柳',
       type: 'employee',
       department: '人事部',
-      syncTime: '2024-03-20 10:15:00',
+      syncTime: '2025-03-20 10:15:00',
       status: 'running',
       progress: 60
     },
@@ -38,7 +38,7 @@ const PersonSync: React.FC = () => {
       id: '3',
       name: '王五',
       type: 'visitor',
-      syncTime: '2024-03-20 10:30:00',
+      syncTime: '2025-03-20 10:30:00',
       status: 'failed',
       progress: 30,
       errorMessage: '人脸图片质量不足'
@@ -48,7 +48,7 @@ const PersonSync: React.FC = () => {
       name: '赵六',
       type: 'employee',
       department: '财务部',
-      syncTime: '2024-03-20 11:00:00',
+      syncTime: '2025-03-20 11:00:00',
       status: 'pending',
       progress: 0
     }

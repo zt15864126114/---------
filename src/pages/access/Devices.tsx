@@ -30,7 +30,7 @@ const AccessDevices: React.FC = () => {
       model: 'DS-K2604',
       location: '1号楼大厅',
       status: 'online',
-      lastSyncTime: '2024-03-20 10:30:00'
+      lastSyncTime: '2025-03-20 10:30:00'
     },
     {
       id: '2',
@@ -40,7 +40,7 @@ const AccessDevices: React.FC = () => {
       model: 'DH-IPC-HDBW1230S',
       location: '2号楼侧门',
       status: 'offline',
-      lastSyncTime: '2024-03-19 15:45:00'
+      lastSyncTime: '2025-03-19 15:45:00'
     },
     {
       id: '3',
@@ -50,7 +50,7 @@ const AccessDevices: React.FC = () => {
       model: 'DS-K1T671M',
       location: '3号楼入口',
       status: 'maintenance',
-      lastSyncTime: '2024-03-18 09:20:00'
+      lastSyncTime: '2025-03-18 09:20:00'
     }
   ];
 

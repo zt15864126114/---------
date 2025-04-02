@@ -62,11 +62,11 @@ const EmployeeInfo: React.FC = () => {
       phone: '13800138001',
       email: 'zhangming@example.com',
       entryTime: '2023-01-15',
-      lastAttendanceTime: '2024-02-15',
-      nextAttendanceTime: '2024-02-16',
+      lastAttendanceTime: '2025-03-15',
+      nextAttendanceTime: '2025-03-16',
       description: '负责园区核心技术的研发和创新，具有10年技术管理经验。清华大学计算机系博士，曾就职于华为、腾讯等知名企业。主导开发了园区智能管理系统，获得多项发明专利。',
-      createTime: '2024-01-01',
-      updateTime: '2024-02-15',
+      createTime: '2025-03-10',
+      updateTime: '2025-03-15',
     },
     {
       id: '2',
@@ -78,12 +78,12 @@ const EmployeeInfo: React.FC = () => {
       gender: '女',
       phone: '13800138002',
       email: 'lihua@example.com',
-      entryTime: '2023-02-20',
-      lastAttendanceTime: '2024-02-10',
-      nextAttendanceTime: '2024-02-11',
+      entryTime: '2023-03-20',
+      lastAttendanceTime: '2025-03-10',
+      nextAttendanceTime: '2025-03-11',
       description: '负责园区的日常运营管理，具有8年运营管理经验。山东大学工商管理硕士，曾就职于万科、保利等知名企业。建立了完善的园区运营管理体系，提升了运营效率30%。',
-      createTime: '2024-01-01',
-      updateTime: '2024-02-10',
+      createTime: '2025-03-10',
+      updateTime: '2025-03-10',
     },
     {
       id: '3',
@@ -96,11 +96,11 @@ const EmployeeInfo: React.FC = () => {
       phone: '13800138003',
       email: 'wangqiang@example.com',
       entryTime: '2023-03-10',
-      lastAttendanceTime: '2024-02-01',
-      nextAttendanceTime: '2024-02-02',
+      lastAttendanceTime: '2025-03-10',
+      nextAttendanceTime: '2025-03-02',
       description: '负责园区的市场推广和品牌建设，具有12年市场营销经验。北京大学市场营销硕士，曾就职于阿里巴巴、京东等知名企业。带领团队年销售额突破10亿元，客户满意度达98%。',
-      createTime: '2024-01-01',
-      updateTime: '2024-02-01',
+      createTime: '2025-03-10',
+      updateTime: '2025-03-10',
     },
     {
       id: '4',
@@ -113,11 +113,11 @@ const EmployeeInfo: React.FC = () => {
       phone: '13800138004',
       email: 'zhaoyang@example.com',
       entryTime: '2023-04-05',
-      lastAttendanceTime: '2024-02-20',
-      nextAttendanceTime: '2024-02-21',
+      lastAttendanceTime: '2025-03-20',
+      nextAttendanceTime: '2025-03-21',
       description: '负责园区的人才招聘和培训管理，具有6年人力资源管理经验。中国人民大学人力资源管理硕士，曾就职于字节跳动、美团等知名企业。建立了完善的人才培养体系，员工留存率提升20%。',
-      createTime: '2024-01-01',
-      updateTime: '2024-02-20',
+      createTime: '2025-03-10',
+      updateTime: '2025-03-20',
     },
     {
       id: '5',
@@ -130,11 +130,11 @@ const EmployeeInfo: React.FC = () => {
       phone: '13800138005',
       email: 'liufang@example.com',
       entryTime: '2023-05-15',
-      lastAttendanceTime: '2024-02-18',
-      nextAttendanceTime: '2024-02-19',
+      lastAttendanceTime: '2025-03-18',
+      nextAttendanceTime: '2025-03-19',
       description: '负责园区的财务管理和预算控制，具有15年财务管理经验。上海财经大学会计学硕士，注册会计师，曾就职于普华永道、德勤等知名企业。建立了科学的财务管理体系，年节省成本1000万元。',
-      createTime: '2024-01-01',
-      updateTime: '2024-02-18',
+      createTime: '2025-03-10',
+      updateTime: '2025-03-18',
     },
   ]);
 
@@ -265,7 +265,7 @@ const EmployeeInfo: React.FC = () => {
           <Card>
             <Statistic
               title="总员工数"
-              value={employeeData.length}
+              value={325}
               prefix={<UserOutlined />}
             />
           </Card>
@@ -274,7 +274,7 @@ const EmployeeInfo: React.FC = () => {
           <Card>
             <Statistic
               title="正常员工"
-              value={employeeData.filter((item) => item.status === 'normal').length}
+              value={324}
               prefix={<CheckCircleOutlined />}
               valueStyle={{ color: '#3f8600' }}
             />

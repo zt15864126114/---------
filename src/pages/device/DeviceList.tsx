@@ -37,7 +37,7 @@ const DeviceList: React.FC = () => {
       ip: '192.168.1.101',
       mac: '00:11:22:33:44:55',
       firmware: 'v1.2.3',
-      lastMaintenance: '2025-03-01',
+      lastMaintenance: '2025-03-10',
       nextMaintenance: '2025-04-01',
       description: '大厅主摄像头',
       createTime: '2025-01-01 09:00:00',

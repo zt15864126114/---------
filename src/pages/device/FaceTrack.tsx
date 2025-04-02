@@ -25,7 +25,7 @@ const FaceTrack: React.FC = () => {
       userType: 'employee',
       location: '1号楼大厅',
       deviceName: '人脸识别设备-01',
-      time: '2024-03-20 09:00:00',
+      time: '2025-03-20 09:00:00',
       confidence: 98.5
     },
     {
@@ -34,7 +34,7 @@ const FaceTrack: React.FC = () => {
       userType: 'visitor',
       location: '2号楼侧门',
       deviceName: '人脸识别设备-02',
-      time: '2024-03-20 09:15:00',
+      time: '2025-03-20 09:15:00',
       confidence: 95.2
     },
     {
@@ -43,7 +43,7 @@ const FaceTrack: React.FC = () => {
       userType: 'employee',
       location: '3号楼后门',
       deviceName: '人脸识别设备-03',
-      time: '2024-03-20 09:30:00',
+      time: '2025-03-20 09:30:00',
       confidence: 99.1
     }
   ];

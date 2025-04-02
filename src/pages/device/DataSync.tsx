@@ -19,7 +19,7 @@ const DataSync: React.FC = () => {
       id: '1',
       deviceType: '门禁设备',
       deviceCount: 10,
-      syncTime: '2024-03-20 10:00:00',
+      syncTime: '2025-03-20 10:00:00',
       status: 'success',
       progress: 100
     },
@@ -27,7 +27,7 @@ const DataSync: React.FC = () => {
       id: '2',
       deviceType: '摄像头',
       deviceCount: 20,
-      syncTime: '2024-03-20 10:15:00',
+      syncTime: '2025-03-20 10:15:00',
       status: 'running',
       progress: 60
     },
@@ -35,7 +35,7 @@ const DataSync: React.FC = () => {
       id: '3',
       deviceType: '人脸识别设备',
       deviceCount: 5,
-      syncTime: '2024-03-20 10:30:00',
+      syncTime: '2025-03-20 10:30:00',
       status: 'failed',
       progress: 30,
       errorMessage: '网络连接失败'
@@ -44,7 +44,7 @@ const DataSync: React.FC = () => {
       id: '4',
       deviceType: '访客设备',
       deviceCount: 8,
-      syncTime: '2024-03-20 11:00:00',
+      syncTime: '2025-03-20 11:00:00',
       status: 'pending',
       progress: 0
     }

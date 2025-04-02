@@ -35,8 +35,8 @@ const Manufacturer: React.FC = () => {
       address: '浙江省杭州市滨江区阡陌路555号',
       description: '全球领先的安防产品及行业解决方案提供商',
       status: 'active',
-      createTime: '2024-01-01 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-10 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '2',
@@ -49,8 +49,8 @@ const Manufacturer: React.FC = () => {
       address: '浙江省杭州市滨江区长河街道滨安路1199号',
       description: '全球领先的以视频为核心的智慧物联解决方案提供商',
       status: 'active',
-      createTime: '2024-01-02 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-02 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '3',
@@ -63,8 +63,8 @@ const Manufacturer: React.FC = () => {
       address: '广东省东莞市塘厦镇平山188号',
       description: '全球领先的人工智能与物联网解决方案提供商',
       status: 'active',
-      createTime: '2024-01-03 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-03 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '4',
@@ -77,8 +77,8 @@ const Manufacturer: React.FC = () => {
       address: '北京市海淀区科学院南路2号融科资讯中心',
       description: '全球领先的人工智能产品和解决方案提供商',
       status: 'active',
-      createTime: '2024-01-04 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-04 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '5',
@@ -91,8 +91,8 @@ const Manufacturer: React.FC = () => {
       address: '上海市徐汇区漕河泾开发区宜山路900号',
       description: '全球领先的计算机视觉和深度学习技术提供商',
       status: 'active',
-      createTime: '2024-01-05 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-05 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '6',
@@ -105,8 +105,8 @@ const Manufacturer: React.FC = () => {
       address: '安徽省合肥市高新区望江西路666号',
       description: '全球领先的智能语音和人工智能上市公司',
       status: 'active',
-      createTime: '2024-01-06 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-06 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '7',
@@ -119,8 +119,8 @@ const Manufacturer: React.FC = () => {
       address: '浙江省杭州市滨江区西兴街道江陵路88号',
       description: '全球领先的视频监控产品及解决方案提供商',
       status: 'active',
-      createTime: '2024-01-07 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-07 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '8',
@@ -133,8 +133,8 @@ const Manufacturer: React.FC = () => {
       address: '广东省深圳市南山区科技园北区',
       description: '专业的智能门禁和访客管理系统提供商',
       status: 'active',
-      createTime: '2024-01-08 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-20 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '9',
@@ -147,8 +147,8 @@ const Manufacturer: React.FC = () => {
       address: '广东省广州市黄埔区科学城科学大道182号',
       description: '领先的人工智能技术服务商',
       status: 'active',
-      createTime: '2024-01-09 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-09 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '10',
@@ -161,8 +161,8 @@ const Manufacturer: React.FC = () => {
       address: '上海市长宁区娄山关路523号',
       description: '专业的人工智能解决方案提供商',
       status: 'active',
-      createTime: '2024-01-10 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-10 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     }
   ];
 

@@ -63,12 +63,12 @@ const BasicInfo: React.FC = () => {
       buildings: 12,
       departments: 8,
       employees: 1200,
-      lastMaintenanceTime: '2024-02-15',
-      nextMaintenanceTime: '2024-05-15',
+      lastMaintenanceTime: '2025-03-15',
+      nextMaintenanceTime: '2025-05-15',
       maintainer: '张明',
       description: '山东新高地智慧园区是集研发、办公、生活于一体的现代化科技园区，占地面积50万平方米，总投资30亿元。园区重点发展人工智能、物联网、大数据等高新技术产业，已入驻企业50余家，年产值超过100亿元。',
-      createTime: '2024-01-01',
-      updateTime: '2024-02-15',
+      createTime: '2025-03-10',
+      updateTime: '2025-03-15',
     }
   ]);
 

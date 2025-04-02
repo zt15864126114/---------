@@ -25,7 +25,7 @@ const Security: React.FC = () => {
       name: '1号楼大厅摄像头',
       location: '1号楼大厅',
       status: 'online',
-      lastSyncTime: '2024-03-20 10:00:00',
+      lastSyncTime: '2025-03-20 10:00:00',
       resolution: '1920x1080',
       type: 'fixed',
       recordingStatus: 'recording'
@@ -35,7 +35,7 @@ const Security: React.FC = () => {
       name: '2号楼走廊摄像头',
       location: '2号楼走廊',
       status: 'offline',
-      lastSyncTime: '2024-03-20 09:30:00',
+      lastSyncTime: '2025-03-20 09:30:00',
       resolution: '1920x1080',
       type: 'ptz',
       recordingStatus: 'stopped'
@@ -45,7 +45,7 @@ const Security: React.FC = () => {
       name: '3号楼停车场摄像头',
       location: '3号楼停车场',
       status: 'maintenance',
-      lastSyncTime: '2024-03-20 08:00:00',
+      lastSyncTime: '2025-03-20 08:00:00',
       resolution: '2560x1440',
       type: 'ptz',
       recordingStatus: 'stopped'

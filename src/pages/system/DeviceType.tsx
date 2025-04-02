@@ -29,8 +29,8 @@ const DeviceType: React.FC = () => {
       manufacturer: '海康威视',
       description: '支持人脸识别、身份证读取、活体检测的门禁一体机',
       status: 'active',
-      createTime: '2024-01-01 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-10 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '2',
@@ -40,8 +40,8 @@ const DeviceType: React.FC = () => {
       manufacturer: '大华技术',
       description: '200万像素高清网络摄像机，支持夜视和移动侦测',
       status: 'active',
-      createTime: '2024-01-02 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-02 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '3',
@@ -51,8 +51,8 @@ const DeviceType: React.FC = () => {
       manufacturer: '海康威视',
       description: '支持多种开门方式，可联网管理的门禁控制器',
       status: 'active',
-      createTime: '2024-01-03 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-03 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '4',
@@ -62,8 +62,8 @@ const DeviceType: React.FC = () => {
       manufacturer: '旷视科技',
       description: '支持人证核验、访客登记、健康码识别的访客管理设备',
       status: 'active',
-      createTime: '2024-01-04 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-04 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '5',
@@ -73,8 +73,8 @@ const DeviceType: React.FC = () => {
       manufacturer: '大华技术',
       description: '支持车牌自动识别、车辆抓拍的专业摄像机',
       status: 'active',
-      createTime: '2024-01-05 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-05 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '6',
@@ -84,8 +84,8 @@ const DeviceType: React.FC = () => {
       manufacturer: '中控智慧',
       description: '支持人脸识别、二维码扫描的智能通道闸',
       status: 'active',
-      createTime: '2024-01-06 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-06 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '7',
@@ -95,8 +95,8 @@ const DeviceType: React.FC = () => {
       manufacturer: '海康威视',
       description: '支持体温检测、人流量统计的热成像摄像机',
       status: 'active',
-      createTime: '2024-01-07 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-07 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '8',
@@ -106,8 +106,8 @@ const DeviceType: React.FC = () => {
       manufacturer: '中控智慧',
       description: '支持NFC打卡、实时定位的智能巡更设备',
       status: 'active',
-      createTime: '2024-01-08 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-20 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '9',
@@ -117,8 +117,8 @@ const DeviceType: React.FC = () => {
       manufacturer: '大华技术',
       description: '支持可视对讲、远程开门的智能门禁设备',
       status: 'active',
-      createTime: '2024-01-09 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-09 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '10',
@@ -128,8 +128,8 @@ const DeviceType: React.FC = () => {
       manufacturer: '中控智慧',
       description: '支持自动抬杆、防砸车的智能道闸',
       status: 'active',
-      createTime: '2024-01-10 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-10 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '11',
@@ -139,8 +139,8 @@ const DeviceType: React.FC = () => {
       manufacturer: '海康威视',
       description: '360度无死角监控，支持电子云台',
       status: 'active',
-      createTime: '2024-01-11 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-11 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     },
     {
       id: '12',
@@ -150,8 +150,8 @@ const DeviceType: React.FC = () => {
       manufacturer: '中控智慧',
       description: '支持指纹、密码、刷卡等多种开门方式',
       status: 'active',
-      createTime: '2024-01-12 00:00:00',
-      updateTime: '2024-03-20 10:00:00',
+      createTime: '2025-03-12 00:00:00',
+      updateTime: '2025-03-20 10:00:00',
     }
   ];
 

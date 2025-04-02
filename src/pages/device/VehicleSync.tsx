@@ -23,7 +23,7 @@ const VehicleSync: React.FC = () => {
       type: 'internal',
       owner: '李明华',
       department: '技术部',
-      syncTime: '2024-03-20 10:00:00',
+      syncTime: '2025-03-20 10:00:00',
       status: 'success',
       progress: 100
     },
@@ -33,7 +33,7 @@ const VehicleSync: React.FC = () => {
       type: 'internal',
       owner: '王柳',
       department: '人事部',
-      syncTime: '2024-03-20 10:15:00',
+      syncTime: '2025-03-20 10:15:00',
       status: 'running',
       progress: 60
     },
@@ -42,7 +42,7 @@ const VehicleSync: React.FC = () => {
       plateNumber: '鲁C11111',
       type: 'external',
       owner: '王五',
-      syncTime: '2024-03-20 10:30:00',
+      syncTime: '2025-03-20 10:30:00',
       status: 'failed',
       progress: 30,
       errorMessage: '车牌识别失败'
@@ -53,7 +53,7 @@ const VehicleSync: React.FC = () => {
       type: 'internal',
       owner: '赵六',
       department: '财务部',
-      syncTime: '2024-03-20 11:00:00',
+      syncTime: '2025-03-20 11:00:00',
       status: 'pending',
       progress: 0
     }

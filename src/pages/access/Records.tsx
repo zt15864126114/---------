@@ -25,7 +25,7 @@ const AccessRecords: React.FC = () => {
       personName: '李明华',
       personType: 'employee',
       accessType: 'face',
-      accessTime: '2024-03-20 10:30:00',
+      accessTime: '2025-03-20 10:30:00',
       accessResult: 'success'
     },
     {
@@ -34,7 +34,7 @@ const AccessRecords: React.FC = () => {
       personName: '王柳',
       personType: 'visitor',
       accessType: 'card',
-      accessTime: '2024-03-19 15:45:00',
+      accessTime: '2025-03-19 15:45:00',
       accessResult: 'success'
     },
     {
@@ -43,7 +43,7 @@ const AccessRecords: React.FC = () => {
       personName: '王五',
       personType: 'employee',
       accessType: 'password',
-      accessTime: '2024-03-18 09:20:00',
+      accessTime: '2025-03-18 09:20:00',
       accessResult: 'fail',
       failReason: '密码错误'
     }
